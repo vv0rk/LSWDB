@@ -16,3 +16,75 @@
     CONSTRAINT [FK_rNomenclature_rConfiguration] FOREIGN KEY ([configurationId]) REFERENCES [dbo].[rConfiguration] ([id])
 );
 
+
+GO
+GRANT DELETE
+    ON OBJECT::[dbo].[rNomenclature] TO [ie\VT_USERS]
+    AS [dbo];
+
+
+GO
+GRANT INSERT
+    ON OBJECT::[dbo].[rNomenclature] TO [ie\VT_USERS]
+    AS [dbo];
+
+
+GO
+GRANT SELECT
+    ON OBJECT::[dbo].[rNomenclature] TO [ie\VT_USERS]
+    AS [dbo];
+
+
+GO
+GRANT UPDATE
+    ON OBJECT::[dbo].[rNomenclature] TO [ie\VT_USERS]
+    AS [dbo];
+
+
+GO
+GRANT DELETE
+    ON OBJECT::[dbo].[rNomenclature] TO [ie\UIT_USERS]
+    AS [dbo];
+
+
+GO
+GRANT INSERT
+    ON OBJECT::[dbo].[rNomenclature] TO [ie\UIT_USERS]
+    AS [dbo];
+
+
+GO
+GRANT SELECT
+    ON OBJECT::[dbo].[rNomenclature] TO [ie\UIT_USERS]
+    AS [dbo];
+
+
+GO
+GRANT UPDATE
+    ON OBJECT::[dbo].[rNomenclature] TO [ie\UIT_USERS]
+    AS [dbo];
+
+
+GO
+GRANT DELETE
+    ON OBJECT::[dbo].[rNomenclature] TO [IE\UIT_USERS_VR]
+    AS [dbo];
+
+
+GO
+GRANT INSERT
+    ON OBJECT::[dbo].[rNomenclature] TO [IE\UIT_USERS_VR]
+    AS [dbo];
+
+
+GO
+GRANT SELECT
+    ON OBJECT::[dbo].[rNomenclature] TO [IE\UIT_USERS_VR]
+    AS [dbo];
+
+
+GO
+GRANT UPDATE
+    ON OBJECT::[dbo].[rNomenclature] TO [IE\UIT_USERS_VR]
+    AS [dbo];
+

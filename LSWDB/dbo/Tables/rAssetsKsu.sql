@@ -25,3 +25,75 @@
     CONSTRAINT [FK_rAssetsKsu_rNomenclature] FOREIGN KEY ([nomenclatureId]) REFERENCES [dbo].[rNomenclature] ([id])
 );
 
+
+GO
+GRANT DELETE
+    ON OBJECT::[dbo].[rAssetsKsu] TO [ie\VT_USERS]
+    AS [dbo];
+
+
+GO
+GRANT INSERT
+    ON OBJECT::[dbo].[rAssetsKsu] TO [ie\VT_USERS]
+    AS [dbo];
+
+
+GO
+GRANT SELECT
+    ON OBJECT::[dbo].[rAssetsKsu] TO [ie\VT_USERS]
+    AS [dbo];
+
+
+GO
+GRANT UPDATE
+    ON OBJECT::[dbo].[rAssetsKsu] TO [ie\VT_USERS]
+    AS [dbo];
+
+
+GO
+GRANT DELETE
+    ON OBJECT::[dbo].[rAssetsKsu] TO [ie\UIT_USERS]
+    AS [dbo];
+
+
+GO
+GRANT INSERT
+    ON OBJECT::[dbo].[rAssetsKsu] TO [ie\UIT_USERS]
+    AS [dbo];
+
+
+GO
+GRANT SELECT
+    ON OBJECT::[dbo].[rAssetsKsu] TO [ie\UIT_USERS]
+    AS [dbo];
+
+
+GO
+GRANT UPDATE
+    ON OBJECT::[dbo].[rAssetsKsu] TO [ie\UIT_USERS]
+    AS [dbo];
+
+
+GO
+GRANT DELETE
+    ON OBJECT::[dbo].[rAssetsKsu] TO [IE\UIT_USERS_VR]
+    AS [dbo];
+
+
+GO
+GRANT INSERT
+    ON OBJECT::[dbo].[rAssetsKsu] TO [IE\UIT_USERS_VR]
+    AS [dbo];
+
+
+GO
+GRANT SELECT
+    ON OBJECT::[dbo].[rAssetsKsu] TO [IE\UIT_USERS_VR]
+    AS [dbo];
+
+
+GO
+GRANT UPDATE
+    ON OBJECT::[dbo].[rAssetsKsu] TO [IE\UIT_USERS_VR]
+    AS [dbo];
+

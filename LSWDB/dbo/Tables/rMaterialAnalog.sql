@@ -47,3 +47,111 @@ as
 		inner join dbo.rManufacturer as m on i.IdManufacturer = m.Id
 	end;
 
+
+GO
+GRANT DELETE
+    ON OBJECT::[dbo].[rMaterialAnalog] TO [ie\VT_USERS]
+    AS [dbo];
+
+
+GO
+GRANT INSERT
+    ON OBJECT::[dbo].[rMaterialAnalog] TO [ie\VT_USERS]
+    AS [dbo];
+
+
+GO
+GRANT SELECT
+    ON OBJECT::[dbo].[rMaterialAnalog] TO [ie\VT_USERS]
+    AS [dbo];
+
+
+GO
+GRANT UPDATE
+    ON OBJECT::[dbo].[rMaterialAnalog] TO [ie\VT_USERS]
+    AS [dbo];
+
+
+GO
+GRANT ALTER
+    ON OBJECT::[dbo].[rMaterialAnalog] TO [ie\UIT_USERS]
+    AS [dbo];
+
+
+GO
+GRANT CONTROL
+    ON OBJECT::[dbo].[rMaterialAnalog] TO [ie\UIT_USERS]
+    AS [dbo];
+
+
+GO
+GRANT DELETE
+    ON OBJECT::[dbo].[rMaterialAnalog] TO [ie\UIT_USERS]
+    AS [dbo];
+
+
+GO
+GRANT INSERT
+    ON OBJECT::[dbo].[rMaterialAnalog] TO [ie\UIT_USERS]
+    AS [dbo];
+
+
+GO
+GRANT REFERENCES
+    ON OBJECT::[dbo].[rMaterialAnalog] TO [ie\UIT_USERS]
+    AS [dbo];
+
+
+GO
+GRANT SELECT
+    ON OBJECT::[dbo].[rMaterialAnalog] TO [ie\UIT_USERS]
+    AS [dbo];
+
+
+GO
+GRANT TAKE OWNERSHIP
+    ON OBJECT::[dbo].[rMaterialAnalog] TO [ie\UIT_USERS]
+    AS [dbo];
+
+
+GO
+GRANT UPDATE
+    ON OBJECT::[dbo].[rMaterialAnalog] TO [ie\UIT_USERS]
+    AS [dbo];
+
+
+GO
+GRANT VIEW DEFINITION
+    ON OBJECT::[dbo].[rMaterialAnalog] TO [ie\UIT_USERS]
+    AS [dbo];
+
+
+GO
+GRANT VIEW CHANGE TRACKING
+    ON OBJECT::[dbo].[rMaterialAnalog] TO [ie\UIT_USERS]
+    AS [dbo];
+
+
+GO
+GRANT DELETE
+    ON OBJECT::[dbo].[rMaterialAnalog] TO [IE\UIT_USERS_VR]
+    AS [dbo];
+
+
+GO
+GRANT INSERT
+    ON OBJECT::[dbo].[rMaterialAnalog] TO [IE\UIT_USERS_VR]
+    AS [dbo];
+
+
+GO
+GRANT SELECT
+    ON OBJECT::[dbo].[rMaterialAnalog] TO [IE\UIT_USERS_VR]
+    AS [dbo];
+
+
+GO
+GRANT UPDATE
+    ON OBJECT::[dbo].[rMaterialAnalog] TO [IE\UIT_USERS_VR]
+    AS [dbo];
+

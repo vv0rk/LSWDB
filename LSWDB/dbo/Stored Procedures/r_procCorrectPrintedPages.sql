@@ -99,3 +99,8 @@ inner join (
   ,October_tgt = October_src
   ,November_tgt = November_src
   ,December_tgt = December_tgt;
+GO
+GRANT EXECUTE
+    ON OBJECT::[dbo].[r_procCorrectPrintedPages] TO [ie\UIT_USERS]
+    AS [dbo];
+

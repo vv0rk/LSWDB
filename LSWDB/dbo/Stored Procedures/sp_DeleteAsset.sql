@@ -23,3 +23,20 @@ AS
 	delete from rAssetsKSU Where rAssetsKsu.id = @idKsu
 
 RETURN 0
+GO
+GRANT EXECUTE
+    ON OBJECT::[dbo].[sp_DeleteAsset] TO [ie\VT_USERS]
+    AS [dbo];
+
+
+GO
+GRANT EXECUTE
+    ON OBJECT::[dbo].[sp_DeleteAsset] TO [ie\UIT_USERS]
+    AS [dbo];
+
+
+GO
+GRANT EXECUTE
+    ON OBJECT::[dbo].[sp_DeleteAsset] TO [IE\UIT_USERS_VR]
+    AS [dbo];
+

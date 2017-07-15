@@ -98,3 +98,9 @@ as
 
 
 
+
+GO
+GRANT EXECUTE
+    ON OBJECT::[dbo].[r_procPrintedPagesFill] TO [ie\UIT_USERS]
+    AS [dbo];
+

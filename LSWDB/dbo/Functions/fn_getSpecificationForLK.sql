@@ -19,7 +19,7 @@ select
 	, ai.assetId
 	, N'НАЛИЧИЕ' as Status
 	from rAssetsImported as ai
-	inner join rAssetsKSU as k on ai.assetKsuId = k.id
+	inner join rAssetsKsu as k on ai.assetKsuId = k.id
 Where ai.idScl = @idScl
 
 union
@@ -38,3 +38,20 @@ inner join rAssetsKsu as k on ai.assetKsuId = k.id
 Where j.idScl1 = @idScl and j.idStatus <> 2
 
 )
+GO
+GRANT SELECT
+    ON OBJECT::[dbo].[fn_getSpecificationForLK] TO [ie\VT_USERS]
+    AS [dbo];
+
+
+GO
+GRANT SELECT
+    ON OBJECT::[dbo].[fn_getSpecificationForLK] TO [ie\UIT_USERS]
+    AS [dbo];
+
+
+GO
+GRANT SELECT
+    ON OBJECT::[dbo].[fn_getSpecificationForLK] TO [IE\UIT_USERS_VR]
+    AS [dbo];
+

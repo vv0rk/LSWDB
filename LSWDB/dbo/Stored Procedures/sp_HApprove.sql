@@ -44,3 +44,39 @@ RETURN 1
 
 
 
+
+GO
+GRANT EXECUTE
+    ON OBJECT::[dbo].[sp_HApprove] TO [ie\VT_USERS]
+    AS [dbo];
+
+
+GO
+GRANT VIEW DEFINITION
+    ON OBJECT::[dbo].[sp_HApprove] TO [ie\VT_USERS]
+    AS [dbo];
+
+
+GO
+GRANT EXECUTE
+    ON OBJECT::[dbo].[sp_HApprove] TO [ie\UIT_USERS]
+    AS [dbo];
+
+
+GO
+GRANT VIEW DEFINITION
+    ON OBJECT::[dbo].[sp_HApprove] TO [ie\UIT_USERS]
+    AS [dbo];
+
+
+GO
+GRANT EXECUTE
+    ON OBJECT::[dbo].[sp_HApprove] TO [IE\UIT_USERS_VR]
+    AS [dbo];
+
+
+GO
+GRANT VIEW DEFINITION
+    ON OBJECT::[dbo].[sp_HApprove] TO [IE\UIT_USERS_VR]
+    AS [dbo];
+

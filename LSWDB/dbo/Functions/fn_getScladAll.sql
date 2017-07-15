@@ -27,3 +27,20 @@ left join (select
 			where c.[Филиал] is null
 			) as c on e.organization = c.idOU
 )
+GO
+GRANT SELECT
+    ON OBJECT::[dbo].[fn_getScladAll] TO [ie\VT_USERS]
+    AS [dbo];
+
+
+GO
+GRANT SELECT
+    ON OBJECT::[dbo].[fn_getScladAll] TO [ie\UIT_USERS]
+    AS [dbo];
+
+
+GO
+GRANT SELECT
+    ON OBJECT::[dbo].[fn_getScladAll] TO [IE\UIT_USERS_VR]
+    AS [dbo];
+
