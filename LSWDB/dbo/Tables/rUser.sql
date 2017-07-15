@@ -1,0 +1,7 @@
+﻿CREATE TABLE [dbo].[rUser] (
+    [Id]       INT           IDENTITY (1, 1) NOT NULL,
+    [UserName] VARCHAR (100) NULL,
+    PRIMARY KEY CLUSTERED ([Id] ASC) WITH (FILLFACTOR = 90),
+    UNIQUE NONCLUSTERED ([UserName] ASC) WITH (FILLFACTOR = 90)
+);
+

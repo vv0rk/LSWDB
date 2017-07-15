@@ -1,0 +1,2 @@
+﻿
+CREATE VIEW [dbo].[web40repADusernooffice] AS Select Top 1000000 tblADusers.Username, tblADusers.Userdomain, tblADusers.Displayname, tblADusers.Office, 'usersm.png' As icon, tblADusers.Lastchanged From tblADusers Where (tblADusers.Office Like '') Or (tblADusers.Office Is Null) Order By tblADusers.Username

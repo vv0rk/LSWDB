@@ -1,0 +1,3 @@
+﻿
+
+CREATE VIEW web50repnotlatestspwin10 AS SELECT TOP 1000000 tsysOS.Image As icon, tblAssets.AssetID, tblAssets.AssetName, tsysOS.OSname As OS, tblAssets.SP As SP, tblAssets.Domain, tblAssets.Username, tblAssets.Userdomain, tblAssets.IPAddress, tblAssets.Description, tblAssetCustom.Manufacturer, tblAssetCustom.Model, tblAssetCustom.Location, tsysIPLocations.IPLocation, tblAssets.Firstseen, tblAssets.Lastseen FROM tblAssets INNER JOIN tblAssetCustom ON tblAssets.AssetID = tblAssetCustom.AssetID INNER JOIN tsysOS ON tblAssets.OScode = tsysOS.OScode Left Join tsysIPLocations ON tblAssets.LocationID = tsysIPLocations.LocationID WHERE (tblAssets.SP <> 0) AND (tsysOS.OSname = 'Win 10') AND (tblAssetCustom.State = 1) ORDER BY tblAssets.AssetName ASC

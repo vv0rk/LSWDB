@@ -1,0 +1,2 @@
+﻿CREATE USER [IE\UIT_USERS_VR];
+

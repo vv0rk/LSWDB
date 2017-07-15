@@ -1,0 +1,1 @@
+﻿CREATE VIEW dbo.web50rep32d9585920b24d448856d9461b40f102 AS SELECT TOP 1000000  m.ShortName As N'Производитель', md.Model As N'Модель', md.Recomend As N'Рек. объем стр./мес.', md.Resource As N'Сред. время жизни стр.' From rModelDevice As md Inner Join rManufacturer As m On md.IdManufacturer = m.Id

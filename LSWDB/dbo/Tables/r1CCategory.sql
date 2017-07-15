@@ -1,0 +1,7 @@
+﻿CREATE TABLE [dbo].[r1CCategory] (
+    [Id]   INT           NOT NULL,
+    [Name] NVARCHAR (50) NOT NULL,
+    PRIMARY KEY CLUSTERED ([Id] ASC) WITH (FILLFACTOR = 90),
+    CONSTRAINT [AK_r1CCategory_Name] UNIQUE NONCLUSTERED ([Name] ASC) WITH (FILLFACTOR = 90)
+);
+

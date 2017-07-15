@@ -1,0 +1,2 @@
+﻿
+CREATE view [dbo].[web40repADusernodisplayname] AS SELECT      TOP 1000000 Username, Userdomain, Name, Displayname, 'usersm.png' AS icon, Lastchanged FROM          dbo.tblADusers WHERE      (Displayname LIKE '') OR                         (Displayname IS NULL) ORDER BY Username

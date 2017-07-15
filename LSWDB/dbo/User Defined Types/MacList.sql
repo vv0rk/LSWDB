@@ -1,0 +1,4 @@
+﻿CREATE TYPE [dbo].[MacList] AS TABLE (
+    [Mac] NVARCHAR (300) NOT NULL,
+    PRIMARY KEY CLUSTERED ([Mac] ASC));
+

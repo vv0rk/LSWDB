@@ -1,0 +1,1 @@
+﻿CREATE VIEW dbo.web50rep5d8db132c8af40bcb00b3d8c77fd108e AS Select Top 1000000 tsysIPLocations.IPLocation, tsysIPLocations.Realstart, tsysIPLocations.Realend From tsysIPLocations Order By tsysIPLocations.Realstart

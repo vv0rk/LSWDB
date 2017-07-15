@@ -1,0 +1,1 @@
+﻿CREATE VIEW dbo.web50rep0174daaf3a654dfb8dcdecac26b86c31 AS SELECT TOP 1000000  u.TableName, u.FieldName As 'ColumnName', u.Type As 'Type operation', u.OldValue, u.NewValue, u.UpdateDate, u.UserName From rAudit As u Order By u.UpdateDate
