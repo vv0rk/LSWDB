@@ -14,3 +14,105 @@ GO
 CREATE UNIQUE NONCLUSTERED INDEX [IX_rSclad1CSprav_IdSclad_Id1CSprav]
     ON [dbo].[rSclad1CSprav]([IdSclad] ASC, [Id1CSprav] ASC) WITH (FILLFACTOR = 90, DATA_COMPRESSION = PAGE);
 
+
+GO
+GRANT DELETE
+    ON OBJECT::[dbo].[rSclad1CSprav] TO [ie\VT_USERS]
+    AS [dbo];
+
+
+GO
+GRANT INSERT
+    ON OBJECT::[dbo].[rSclad1CSprav] TO [ie\VT_USERS]
+    AS [dbo];
+
+
+GO
+GRANT SELECT
+    ON OBJECT::[dbo].[rSclad1CSprav] TO [ie\VT_USERS]
+    AS [dbo];
+
+
+GO
+GRANT UPDATE
+    ON OBJECT::[dbo].[rSclad1CSprav] TO [ie\VT_USERS]
+    AS [dbo];
+
+
+GO
+GRANT ALTER
+    ON OBJECT::[dbo].[rSclad1CSprav] TO [ie\UIT_USERS]
+    AS [dbo];
+
+
+GO
+GRANT CONTROL
+    ON OBJECT::[dbo].[rSclad1CSprav] TO [ie\UIT_USERS]
+    AS [dbo];
+
+
+GO
+GRANT DELETE
+    ON OBJECT::[dbo].[rSclad1CSprav] TO [ie\UIT_USERS]
+    AS [dbo];
+
+
+GO
+GRANT INSERT
+    ON OBJECT::[dbo].[rSclad1CSprav] TO [ie\UIT_USERS]
+    AS [dbo];
+
+
+GO
+GRANT REFERENCES
+    ON OBJECT::[dbo].[rSclad1CSprav] TO [ie\UIT_USERS]
+    AS [dbo];
+
+
+GO
+GRANT SELECT
+    ON OBJECT::[dbo].[rSclad1CSprav] TO [ie\UIT_USERS]
+    AS [dbo];
+
+
+GO
+GRANT UPDATE
+    ON OBJECT::[dbo].[rSclad1CSprav] TO [ie\UIT_USERS]
+    AS [dbo];
+
+
+GO
+GRANT VIEW DEFINITION
+    ON OBJECT::[dbo].[rSclad1CSprav] TO [ie\UIT_USERS]
+    AS [dbo];
+
+
+GO
+GRANT VIEW CHANGE TRACKING
+    ON OBJECT::[dbo].[rSclad1CSprav] TO [ie\UIT_USERS]
+    AS [dbo];
+
+
+GO
+GRANT DELETE
+    ON OBJECT::[dbo].[rSclad1CSprav] TO [IE\UIT_USERS_VR]
+    AS [dbo];
+
+
+GO
+GRANT INSERT
+    ON OBJECT::[dbo].[rSclad1CSprav] TO [IE\UIT_USERS_VR]
+    AS [dbo];
+
+
+GO
+GRANT SELECT
+    ON OBJECT::[dbo].[rSclad1CSprav] TO [IE\UIT_USERS_VR]
+    AS [dbo];
+
+
+GO
+GRANT UPDATE
+    ON OBJECT::[dbo].[rSclad1CSprav] TO [IE\UIT_USERS_VR]
+    AS [dbo];
+

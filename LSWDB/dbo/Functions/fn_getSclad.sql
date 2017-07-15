@@ -35,3 +35,20 @@ left join (select
 Where cast( a.id as nvarchar(20)) like cast( @idAsset as nvarchar(20))
 
 )
+GO
+GRANT SELECT
+    ON OBJECT::[dbo].[fn_getSclad] TO [ie\VT_USERS]
+    AS [dbo];
+
+
+GO
+GRANT SELECT
+    ON OBJECT::[dbo].[fn_getSclad] TO [ie\UIT_USERS]
+    AS [dbo];
+
+
+GO
+GRANT SELECT
+    ON OBJECT::[dbo].[fn_getSclad] TO [IE\UIT_USERS_VR]
+    AS [dbo];
+

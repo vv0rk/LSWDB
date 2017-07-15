@@ -25,3 +25,20 @@ as return
 
 	Where cast(s.Id as nvarchar(20)) like cast(@idScl as nvarchar(20))
 )
+GO
+GRANT SELECT
+    ON OBJECT::[dbo].[fn_getSpecification] TO [ie\VT_USERS]
+    AS [dbo];
+
+
+GO
+GRANT SELECT
+    ON OBJECT::[dbo].[fn_getSpecification] TO [ie\UIT_USERS]
+    AS [dbo];
+
+
+GO
+GRANT SELECT
+    ON OBJECT::[dbo].[fn_getSpecification] TO [IE\UIT_USERS_VR]
+    AS [dbo];
+

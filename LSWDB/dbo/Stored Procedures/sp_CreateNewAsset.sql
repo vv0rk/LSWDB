@@ -26,9 +26,9 @@ AS
 	Select @guid = NEWID(), @date = GETDATE();
 
 	-- проверка необходимых аргументов
-	IF @name is null or @inventoryNum is null or @orgOwner is null or @orgUser is null or @gorod is null or @address is null
+	IF @name is null or @inventoryNum is null or @orgOwner is null or @orgUser is null 
 		begin
-			raiserror( N'Не определен один из аргументов: название, инвент №, организация владелец, организация пользователь, город, адрес', 12, 1);
+			raiserror( N'Не определен один из аргументов: название, инвент №, организация владелец, организация пользователь', 12, 1);
 			return 1;
 		end 
 
@@ -93,3 +93,20 @@ AS
 	);
 
 RETURN 0
+GO
+GRANT EXECUTE
+    ON OBJECT::[dbo].[sp_CreateNewAsset] TO [ie\VT_USERS]
+    AS [dbo];
+
+
+GO
+GRANT EXECUTE
+    ON OBJECT::[dbo].[sp_CreateNewAsset] TO [ie\UIT_USERS]
+    AS [dbo];
+
+
+GO
+GRANT EXECUTE
+    ON OBJECT::[dbo].[sp_CreateNewAsset] TO [IE\UIT_USERS_VR]
+    AS [dbo];
+

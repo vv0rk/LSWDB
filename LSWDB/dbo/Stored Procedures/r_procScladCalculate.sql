@@ -399,3 +399,8 @@ Create Procedure r_procScladCalculate
 			Удаляем записи со значением NULL по ним не было никакого движения
 		 */
 		 delete from dbo.rScladMaterialOriginal where dbo.rScladMaterialOriginal.Number is null
+GO
+GRANT EXECUTE
+    ON OBJECT::[dbo].[r_procScladCalculate] TO [ie\UIT_USERS]
+    AS [dbo];
+

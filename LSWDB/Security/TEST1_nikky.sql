@@ -1,0 +1,3 @@
+﻿CREATE LOGIN [TEST1\nikky]
+    FROM WINDOWS WITH DEFAULT_LANGUAGE = [русский];
+

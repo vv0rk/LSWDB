@@ -17,3 +17,20 @@ RETURNS TABLE as return
 	inner join rHScladType as t on s.idType = t.Id
 	where ss.StatusSclad like N'%не одобрена%' or ss.StatusSclad like N'%выдана%' or ss.StatusSclad like N'%нет%'
 )
+GO
+GRANT SELECT
+    ON OBJECT::[dbo].[fn_getNonApprovedSclad] TO [ie\VT_USERS]
+    AS [dbo];
+
+
+GO
+GRANT SELECT
+    ON OBJECT::[dbo].[fn_getNonApprovedSclad] TO [ie\UIT_USERS]
+    AS [dbo];
+
+
+GO
+GRANT SELECT
+    ON OBJECT::[dbo].[fn_getNonApprovedSclad] TO [IE\UIT_USERS_VR]
+    AS [dbo];
+

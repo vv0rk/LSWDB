@@ -88,3 +88,75 @@ END
 --	IF @num_prihod >
 --END
 
+
+GO
+GRANT DELETE
+    ON OBJECT::[dbo].[rActiveCategory1] TO [ie\VT_USERS]
+    AS [dbo];
+
+
+GO
+GRANT INSERT
+    ON OBJECT::[dbo].[rActiveCategory1] TO [ie\VT_USERS]
+    AS [dbo];
+
+
+GO
+GRANT SELECT
+    ON OBJECT::[dbo].[rActiveCategory1] TO [ie\VT_USERS]
+    AS [dbo];
+
+
+GO
+GRANT UPDATE
+    ON OBJECT::[dbo].[rActiveCategory1] TO [ie\VT_USERS]
+    AS [dbo];
+
+
+GO
+GRANT DELETE
+    ON OBJECT::[dbo].[rActiveCategory1] TO [ie\UIT_USERS]
+    AS [dbo];
+
+
+GO
+GRANT INSERT
+    ON OBJECT::[dbo].[rActiveCategory1] TO [ie\UIT_USERS]
+    AS [dbo];
+
+
+GO
+GRANT SELECT
+    ON OBJECT::[dbo].[rActiveCategory1] TO [ie\UIT_USERS]
+    AS [dbo];
+
+
+GO
+GRANT UPDATE
+    ON OBJECT::[dbo].[rActiveCategory1] TO [ie\UIT_USERS]
+    AS [dbo];
+
+
+GO
+GRANT DELETE
+    ON OBJECT::[dbo].[rActiveCategory1] TO [IE\UIT_USERS_VR]
+    AS [dbo];
+
+
+GO
+GRANT INSERT
+    ON OBJECT::[dbo].[rActiveCategory1] TO [IE\UIT_USERS_VR]
+    AS [dbo];
+
+
+GO
+GRANT SELECT
+    ON OBJECT::[dbo].[rActiveCategory1] TO [IE\UIT_USERS_VR]
+    AS [dbo];
+
+
+GO
+GRANT UPDATE
+    ON OBJECT::[dbo].[rActiveCategory1] TO [IE\UIT_USERS_VR]
+    AS [dbo];
+

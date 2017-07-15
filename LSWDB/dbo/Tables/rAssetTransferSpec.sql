@@ -9,3 +9,75 @@
     CONSTRAINT [FK_rAssetTransferSpec_rAssetTransfer_IdAssetTransfer_Id] FOREIGN KEY ([IdAssetTransfer]) REFERENCES [dbo].[rAssetTransfer] ([Id]) ON DELETE CASCADE
 );
 
+
+GO
+GRANT DELETE
+    ON OBJECT::[dbo].[rAssetTransferSpec] TO [ie\VT_USERS]
+    AS [dbo];
+
+
+GO
+GRANT INSERT
+    ON OBJECT::[dbo].[rAssetTransferSpec] TO [ie\VT_USERS]
+    AS [dbo];
+
+
+GO
+GRANT SELECT
+    ON OBJECT::[dbo].[rAssetTransferSpec] TO [ie\VT_USERS]
+    AS [dbo];
+
+
+GO
+GRANT UPDATE
+    ON OBJECT::[dbo].[rAssetTransferSpec] TO [ie\VT_USERS]
+    AS [dbo];
+
+
+GO
+GRANT DELETE
+    ON OBJECT::[dbo].[rAssetTransferSpec] TO [ie\UIT_USERS]
+    AS [dbo];
+
+
+GO
+GRANT INSERT
+    ON OBJECT::[dbo].[rAssetTransferSpec] TO [ie\UIT_USERS]
+    AS [dbo];
+
+
+GO
+GRANT SELECT
+    ON OBJECT::[dbo].[rAssetTransferSpec] TO [ie\UIT_USERS]
+    AS [dbo];
+
+
+GO
+GRANT UPDATE
+    ON OBJECT::[dbo].[rAssetTransferSpec] TO [ie\UIT_USERS]
+    AS [dbo];
+
+
+GO
+GRANT DELETE
+    ON OBJECT::[dbo].[rAssetTransferSpec] TO [IE\UIT_USERS_VR]
+    AS [dbo];
+
+
+GO
+GRANT INSERT
+    ON OBJECT::[dbo].[rAssetTransferSpec] TO [IE\UIT_USERS_VR]
+    AS [dbo];
+
+
+GO
+GRANT SELECT
+    ON OBJECT::[dbo].[rAssetTransferSpec] TO [IE\UIT_USERS_VR]
+    AS [dbo];
+
+
+GO
+GRANT UPDATE
+    ON OBJECT::[dbo].[rAssetTransferSpec] TO [IE\UIT_USERS_VR]
+    AS [dbo];
+

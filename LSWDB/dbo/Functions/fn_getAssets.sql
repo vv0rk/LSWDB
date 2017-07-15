@@ -30,3 +30,20 @@ left join rHJStatus as hs on j.idStatus = hs.Id
 
 
 )
+GO
+GRANT SELECT
+    ON OBJECT::[dbo].[fn_getAssets] TO [ie\VT_USERS]
+    AS [dbo];
+
+
+GO
+GRANT SELECT
+    ON OBJECT::[dbo].[fn_getAssets] TO [ie\UIT_USERS]
+    AS [dbo];
+
+
+GO
+GRANT SELECT
+    ON OBJECT::[dbo].[fn_getAssets] TO [IE\UIT_USERS_VR]
+    AS [dbo];
+

@@ -110,3 +110,38 @@ AS
 
 		return 0;
 	END;
+GO
+GRANT EXECUTE
+    ON OBJECT::[dbo].[sp_HTransfer] TO [ie\VT_USERS]
+    AS [dbo];
+
+
+GO
+GRANT VIEW DEFINITION
+    ON OBJECT::[dbo].[sp_HTransfer] TO [ie\VT_USERS]
+    AS [dbo];
+
+
+GO
+GRANT EXECUTE
+    ON OBJECT::[dbo].[sp_HTransfer] TO [ie\UIT_USERS]
+    AS [dbo];
+
+
+GO
+GRANT VIEW DEFINITION
+    ON OBJECT::[dbo].[sp_HTransfer] TO [ie\UIT_USERS]
+    AS [dbo];
+
+
+GO
+GRANT EXECUTE
+    ON OBJECT::[dbo].[sp_HTransfer] TO [IE\UIT_USERS_VR]
+    AS [dbo];
+
+
+GO
+GRANT VIEW DEFINITION
+    ON OBJECT::[dbo].[sp_HTransfer] TO [IE\UIT_USERS_VR]
+    AS [dbo];
+
