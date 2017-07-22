@@ -6,7 +6,10 @@
     [IdManufacturer] INT            NULL,
     PRIMARY KEY CLUSTERED ([Id] ASC) WITH (FILLFACTOR = 90),
     CONSTRAINT [FK_rManufacturer_rMaterialOriginal_IdManufacturer] FOREIGN KEY ([IdManufacturer]) REFERENCES [dbo].[rManufacturer] ([Id]) ON DELETE CASCADE,
-    CONSTRAINT [AK_rMaterialOriginal_PartNumber] UNIQUE NONCLUSTERED ([PartNumber] ASC) WITH (FILLFACTOR = 90)
+    CONSTRAINT [AK_rMaterialOriginal_PartNumber] UNIQUE NONCLUSTERED ([PartNumber] ASC) WITH (FILLFACTOR = 90),
+	-- если 0 то интенсивность не влияет
+	-- если 1 то интенсивность влияет и рассчитывается исходя из реально потреченных картриджей
+	[IntenceOn]		bit not null default 0
 );
 
 

@@ -9,6 +9,7 @@ RETURNS @retMaterialOriginal TABLE
 	partNumber nvarchar(100),
 	Name nvarchar(255),
 	Resource int,
+	IntenceOn bit, 
 	Manufacturer nvarchar(100)
 )
 as 
@@ -19,6 +20,7 @@ BEGIN
 		o.PartNumber,
 		o.Name,
 		o.Resource,
+		o.IntenceOn,
 		m.ShortName as 'Manufacturer'
 	from dbo.rMaterialOriginal as o
 	inner join dbo.rManufacturer as m on o.IdManufacturer = m.Id
