@@ -3856,5 +3856,14 @@
       <AnsiNulls>On</AnsiNulls>
       <QuotedIdentifier>On</QuotedIdentifier>
     </Build>
+    <Build Include="dbo\Stored Procedures\sp_AddNewMaterialOriginal.sql" />
+    <Build Include="dbo\Stored Procedures\sp_AddNewMaterialAnalog.sql" />
+    <Build Include="dbo\Functions\fn_getMaterialOriginal.sql" />
+    <Build Include="dbo\Tables\rPrinterMaterialNorm.sql" />
+    <Build Include="dbo\Stored Procedures\sp_UpdateNorm.sql" />
+    <Build Include="dbo\Functions\fn_getPrinterMaterialNorm.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="LSWDB.publish.xml" />
   </ItemGroup>
 </Project>
