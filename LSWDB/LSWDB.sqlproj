@@ -3862,8 +3862,20 @@
     <Build Include="dbo\Tables\rPrinterMaterialNorm.sql" />
     <Build Include="dbo\Stored Procedures\sp_UpdateNorm.sql" />
     <Build Include="dbo\Functions\fn_getPrinterMaterialNorm.sql" />
+    <Build Include="dbo\Functions\fn_getPrinterRashod.sql" />
+    <Build Include="dbo\Stored Procedures\sp_setIntence.sql" />
+    <Build Include="dbo\Functions\fn_getPagesMonth.sql" />
+    <Build Include="dbo\Tables\rBudget.sql" />
+    <Build Include="dbo\Tables\rBudgetSourceInfo.sql" />
+    <Build Include="dbo\Tables\rBudgetSprav.sql" />
+    <Build Include="dbo\Tables\rBudgetPurchase.sql" />
+    <Build Include="dbo\Stored Procedures\sp_ExecDaily.sql" />
+    <Build Include="dbo\Stored Procedures\sp_ExecHourly.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="LSWDB.publish.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <RefactorLog Include="LSWDB.refactorlog" />
   </ItemGroup>
 </Project>

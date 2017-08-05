@@ -17,121 +17,138 @@ GO
 
 -- =============================================
 -- Author:		<Author,Savin,Nikolay>
--- Create date: <Create Date,17/12/2016,>
--- Description:	<Когда добавляем запись в таблицу rMaterialOriginal такая же запись добавляется в таблицу rMaterialAnalog 
---				и создается запись в таблице rMaterialLink>
+-- Create date: <Create Date,27/05/2017,>
+/* Description:	<Универсальный триггер для записи логов по изменению данных>
+	https://stackoverflow.com/questions/19737723/log-record-changes-in-sql-server-in-an-audit-table
+*/
 -- =============================================
-CREATE TRIGGER Trigger_rMaterialOriginal_Create
-on [dbo].[rMaterialOriginal] FOR INSERT
+CREATE TRIGGER TR_rMaterialOriginal ON rMaterialOriginal FOR UPDATE, insert, delete
 AS
+
+DECLARE @bit INT ,
+       @field INT ,
+       @maxfield INT ,
+       @char INT ,
+       @fieldname NVARCHAR(128) ,
+       @TableName NVARCHAR(128) ,
+       @PKCols NVARCHAR(1000) ,
+       @sql NVARCHAR(2000), 
+       @UpdateDate NVARCHAR(21) ,
+       @UserName NVARCHAR(128) ,
+       @Type CHAR(1) ,
+       @PKSelect NVARCHAR(1000)
+
+
+--You will need to change @TableName to match the table to be audited. 
+-- Here we made GUESTS for your example.
+SELECT @TableName = 'rMaterialOriginal'
+
+-- date and user
+SELECT         @UserName = SYSTEM_USER ,
+       @UpdateDate = CONVERT (NVARCHAR(30),GETDATE(),126)
+
+-- Action
+IF EXISTS (SELECT * FROM inserted)
+       IF EXISTS (SELECT * FROM deleted)
+               SELECT @Type = 'U'
+       ELSE
+               SELECT @Type = 'I'
+ELSE
+       SELECT @Type = 'D'
+
+-- get list of columns
+SELECT * INTO #ins FROM inserted
+SELECT * INTO #del FROM deleted
+
+-- Get primary key columns for full outer join
+SELECT @PKCols = COALESCE(@PKCols + ' and', ' on') 
+               + ' i.' + c.COLUMN_NAME + ' = d.' + c.COLUMN_NAME
+       FROM    INFORMATION_SCHEMA.TABLE_CONSTRAINTS pk ,
+
+              INFORMATION_SCHEMA.KEY_COLUMN_USAGE c
+       WHERE   pk.TABLE_NAME = @TableName
+       AND     CONSTRAINT_TYPE = 'PRIMARY KEY'
+       AND     c.TABLE_NAME = pk.TABLE_NAME
+       AND     c.CONSTRAINT_NAME = pk.CONSTRAINT_NAME
+
+-- Get primary key select for insert
+--SELECT @PKSelect = COALESCE(@PKSelect+'+','') 
+--       + '''<' + COLUMN_NAME 
+--       + '=''+convert(varchar(100),
+--coalesce(i.' + COLUMN_NAME +',d.' + COLUMN_NAME + '))+''>''' 
+--       FROM    INFORMATION_SCHEMA.TABLE_CONSTRAINTS pk ,
+--               INFORMATION_SCHEMA.KEY_COLUMN_USAGE c
+--       WHERE   pk.TABLE_NAME = @TableName
+--       AND     CONSTRAINT_TYPE = 'PRIMARY KEY'
+--       AND     c.TABLE_NAME = pk.TABLE_NAME
+--       AND     c.CONSTRAINT_NAME = pk.CONSTRAINT_NAME
+
+-- Get primary key select for insert
+SELECT @PKSelect = COALESCE(@PKSelect+'+','') 
+       + '''' 
+       + '''+convert(nvarchar(100),
+coalesce(i.' + COLUMN_NAME +',d.' + COLUMN_NAME + '))+''''' 
+       FROM    INFORMATION_SCHEMA.TABLE_CONSTRAINTS pk ,
+               INFORMATION_SCHEMA.KEY_COLUMN_USAGE c
+       WHERE   pk.TABLE_NAME = @TableName
+       AND     CONSTRAINT_TYPE = 'PRIMARY KEY'
+       AND     c.TABLE_NAME = pk.TABLE_NAME
+       AND     c.CONSTRAINT_NAME = pk.CONSTRAINT_NAME
+
+
+
+IF @PKCols IS NULL
 BEGIN
-	-- SET NOCOUNT ON added to prevent extra result sets from
-	-- interfering with SELECT statements.
-	SET NOCOUNT ON;
-
-	INSERT INTO 
-		[dbo].rMaterialAnalog
-		(
-			PartNumber,
-			Name,
-			[Resource],
-			IdManufacturer
-		)
-		Select
-			PartNumber,
-			Name,
-			[Resource],
-			IdManufacturer
-		From
-			INSERTED
-
-	INSERT INTO
-		[dbo].rMaterialLink
-		(
-			IdOriginal,
-			IdAnalog
-		)
-		Select
-			i.Id,
-			ma.Id
-		from inserted as i
-		inner join [dbo].rMaterialAnalog as ma on i.PartNumber = ma.PartNumber
-			
-
+       RAISERROR('no PK on table %s', 16, -1, @TableName)
+       RETURN
 END
 
-
-GO
-
--- =============================================
--- Author:		<Author,Savin,Nikolay>
--- Create date: <Create Date,17/12/2016,>
--- Description:	<Когда Удаляем запись из таблицы rMaterialOriginal такая же запись удаляется из таблицы rMaterialAnalog 
---				и таблицы rMaterialLink>
--- =============================================
-CREATE TRIGGER [dbo].[TRIGGER_rMaterialOriginal_Delete]
-on [dbo].[rMaterialOriginal] FOR DELETE
-AS
+SELECT         @field = 0, 
+       @maxfield = MAX(ORDINAL_POSITION) 
+       FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = @TableName
+WHILE @field < @maxfield
 BEGIN
-	-- SET NOCOUNT ON added to prevent extra result sets from
-	-- interfering with SELECT statements.
-	SET NOCOUNT ON;
-
-	declare @id int
-	declare @partnumber nvarchar(100)
-
-	select @id = (select id from deleted)
-	select @partnumber = (select PartNumber from deleted)
-
-	delete from [dbo].rMaterialLink
-	where [dbo].rMaterialLink.IdOriginal = @id
-
-	--delete from [dbo].rMaterialAnalog
-	--where [dbo].rMaterialAnalog.PartNumber = @partnumber
-
-
-END
-
-
-GO
-
--- =============================================
--- Author:		<Author,Savin,Nikolay>
--- Create date: <Create Date,17/12/2016,>
--- Description:	<Когда добавляем запись в таблицу rMaterialOriginal такая же запись добавляется в таблицу rMaterialAnalog 
---				и создается запись в таблице rMaterialLink>
--- =============================================
-CREATE TRIGGER [dbo].[Trigger_Create]
-on [dbo].[rMaterialOriginal] FOR UPDATE
-AS
-BEGIN
-	-- SET NOCOUNT ON added to prevent extra result sets from
-	-- interfering with SELECT statements.
-	SET NOCOUNT ON;
-
-	with c as (
-		select 
-			mo.IdManufacturer as Manuf_src,
-			mo.PartNumber as PN_src,
-			mo.Name as Name_src,
-			mo.Resource as Res_src,
-
-			ma.IdManufacturer as Manuf_tgt,
-			ma.PartNumber as PN_tgt,
-			ma.Name as Name_tgt,
-			ma.Resource as Res_tgt
-
-		from INSERTED as mo
-		--inner join dbo.rMaterialLink as ml on mo.Id = ml.IdOriginal
-		inner join dbo.rMaterialAnalog as ma on ma.PartNumber = mo.PartNumber
-	)
-	update c 
-	set 
-	Manuf_tgt = Manuf_src,
-	--PN_tgt = PN_src,
-	Name_tgt = Name_src,
-	Res_tgt = Res_src;
-
+       SELECT @field = MIN(ORDINAL_POSITION) 
+               FROM INFORMATION_SCHEMA.COLUMNS 
+               WHERE TABLE_NAME = @TableName 
+               AND ORDINAL_POSITION > @field
+       SELECT @bit = (@field - 1 )% 8 + 1
+       SELECT @bit = POWER(2,@bit - 1)
+       SELECT @char = ((@field - 1) / 8) + 1
+       IF SUBSTRING(COLUMNS_UPDATED(),@char, 1) & @bit > 0
+                                       OR @Type IN ('I','D')
+       BEGIN
+               SELECT @fieldname = COLUMN_NAME 
+                       FROM INFORMATION_SCHEMA.COLUMNS 
+                       WHERE TABLE_NAME = @TableName 
+                       AND ORDINAL_POSITION = @field
+               SELECT @sql = '
+insert rAudit (    Type, 
+               TableName, 
+               PK, 
+               FieldName, 
+               OldValue, 
+               NewValue, 
+               UpdateDate, 
+               UserName)
+select ''' + @Type + ''',''' 
+       + @TableName + ''',' + @PKSelect
+       + ',''' + @fieldname + ''''
+       + ',convert(nvarchar(1000),d.' + @fieldname + ')'
+       + ',convert(nvarchar(1000),i.' + @fieldname + ')'
+       + ',''' + @UpdateDate + ''''
+       + ',''' + @UserName + ''''
+       + ' from #ins i full outer join #del d'
+       + @PKCols
+       + ' where i.' + @fieldname + ' <> d.' + @fieldname 
+       + ' or (i.' + @fieldname + ' is null and  d.'
+                                + @fieldname
+                                + ' is not null)' 
+       + ' or (i.' + @fieldname + ' is not null and  d.' 
+                                + @fieldname
+                                + ' is null)' 
+               EXEC (@sql)
+       END
 END
 
 

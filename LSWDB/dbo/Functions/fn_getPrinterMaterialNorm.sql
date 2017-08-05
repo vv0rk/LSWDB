@@ -32,7 +32,8 @@ RETURNS @returntable TABLE
 	Address nvarchar(255)  null,
 	Office nvarchar(255)  null,
 	Resp nvarchar(255)  null,
-	idMaterialOriginal int null
+	idMaterialOriginal int null,
+	IntenceOn bit null
 )
 AS
 BEGIN
@@ -67,7 +68,8 @@ BEGIN
 			c.Custom3,
 			c.Custom4,
 			c.Custom19,
-			o.Id
+			o.Id,
+			o.IntenceOn
 
 		from tblAssets as a 
 		inner join tblAssetCustom as c on a.AssetId = c.AssetID

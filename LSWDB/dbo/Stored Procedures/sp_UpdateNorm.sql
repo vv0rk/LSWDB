@@ -1,4 +1,8 @@
-﻿CREATE PROCEDURE [dbo].[sp_UpdateNorm]
+﻿/*
+	процедура предназначена для внесения данных в таблицу rPrinterMaterialNorm
+	для определенного сочетания AssetId и idMaterialOriginal
+*/
+CREATE PROCEDURE [dbo].[sp_UpdateNorm]
 	@AssetId int = NULL,
 	@idMaterialOriginal int = NULL,
 	@MaterialOriginal nvarchar(100) = NULL,

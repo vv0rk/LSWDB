@@ -12,6 +12,7 @@
     [IdOU]                  INT            NULL,
     [INN]                   NVARCHAR (30)  NULL,
     [idOUmod]               INT            NULL,
+    [isOrg] int not NULL default 1, 
     PRIMARY KEY CLUSTERED ([id] ASC) WITH (FILLFACTOR = 90)
 );
 

@@ -6,48 +6,83 @@ as
 	Заполняем таблицу rMaterialSvod 
 	формируем для каждого устройства сколько отпечатано страниц в месяц
 */
+BEGIN
+	
+
 	delete from dbo.rMaterialSvod;
 
+	-- вставка значений AssetId и idMaterialOriginal
 	insert into dbo.rMaterialSvod 
 	(
 		AssetId,
+		idModelDevices,
 		ModelSprav,
 		ModelAsset,
+		idMaterialOriginal,
 		PartNumber,
-		Resource,
-		Januar, 
-		Februar, 
-		March, 
-		April, 
-		May, 
-		June, 
-		July, 
-		August, 
-		September,
-		October,
-		November,
-		December,
-		ScladRemain,
-		IdSclad
+		Resource
 	)
 	select 
-		a.AssetID
-		, mo.ModelSprav
+		ac.AssetID
+		, md.id
+		, md.Model
 		, ac.Model
+		, mo.Id
 		, mo.PartNumber
-		, mo.Resourc
-		, [1], [2], [3], [4], [5], [6], [7], [8], [9], [10], [11], [12]
-		, smo.Number
-		, ss.Id
+		, mo.Resource
+	from rMaterialOriginal as mo
+	inner join rModelComplect as mc on mo.Id = mc.IdMaterialOriginal
+	inner join rModelComplectStatus as mcs on mc.IdStatus= mcs.Id
+	inner join rModelDevice as md on mc.IdModel = md.Id
+	inner join rModelLink as ml on md.Model = ml.ModelSprav
+	inner join tblAssetCustom as ac on ml.ModelAsset = ac.Model
 
-	from dbo.tblAssets as a 
-	inner join dbo.tblAssetCustom as ac on a.assetid = ac.AssetId 
+	where mcs.Status = N'ДА'
+
+	-- добавление принтеров для которых не сделаны комплекты
+	insert into dbo.rMaterialSvod 
+	(
+		AssetId,
+		idModelDevices,
+		ModelSprav,
+		ModelAsset
+	)
+	select 
+		ac.AssetID
+		, md.Id
+		, md.Model
+		, ac.Model
+	from tblAssetCustom as ac
+	inner join tblAssets as a on ac.AssetID = a.AssetID
 	Inner Join tsysAssetTypes As at On a.Assettype = at.AssetType and at.AssetTypename = 'Printer'
+	left join rModelLink as ml on ac.Model = ml.ModelAsset
+	left join rModelDevice as md on ml.ModelSprav = md.Model
+	left join rMaterialSvod as ms on ac.AssetID = ms.AssetId
+	Where ms.AssetId is null
+
+	-- добавляем значения по отпечаткам для каждого AssetId
+
+	-- для этого файла надо поставить BUILD NONE иначе ошибка SQL70001
+	UPDATE dbo.rMaterialSvod
+	SET
+		dbo.rMaterialSvod.Januar = p.[1],
+		dbo.rMaterialSvod.Februar = p.[2],
+		dbo.rMaterialSvod.March = p.[3],
+		dbo.rMaterialSvod.April = p.[4],
+		dbo.rMaterialSvod.May = p.[5],
+		dbo.rMaterialSvod.June = p.[6],
+		dbo.rMaterialSvod.July = p.[7],
+		dbo.rMaterialSvod.August =  p.[8],
+		dbo.rMaterialSvod.September = p.[9],
+		dbo.rMaterialSvod.October = p.[10],
+		dbo.rMaterialSvod.November = p.[11],
+		dbo.rMaterialSvod.December = p.[12]
+
+	FROM dbo.rMaterialSvod as ms
 	inner join (
 		select 
 			AssetId
 			, [1], [2], [3], [4], [5], [6], [7], [8], [9], [10], [11], [12]
-		--	, p.PrintedPages
 		from (
 			select 
 				a.AssetID as AssetId
@@ -76,31 +111,6 @@ as
 			max(p.PrintedPages)
 			for p.mmonth in ([1], [2], [3], [4], [5], [6], [7], [8], [9], [10], [11], [12])
 		) as pvt
-		) as pvt on a.AssetID = pvt.AssetId
-	left join (
-		select 
-		mo.PartNumber
-		, mo.Id as IdMaterialOriginal
-		, mo.Resource as Resourc
-		, md.Model as ModelSprav
-		, ml.ModelAsset as ModelAsset
-
-		from dbo.rMaterialOriginal as mo
-		inner join dbo.rModelComplect as mc on mo.Id = mc.IdMaterialOriginal 
-		inner join dbo.rModelComplectStatus as mcs on mcs.Id = mc.IdStatus and mcs.Status = N'ДА'
-		inner join dbo.rModelDevice as md on mc.IdModel = md.Id
-		inner join dbo.rModelLink as ml on ml.ModelSprav = md.Model
-		) as mo on ac.Model = mo.ModelAsset
-	left join dbo.rAssetsScladLink as asl on a.AssetId = asl.AssetId
-	left join dbo.rSclad as ss on asl.IdSclad = ss.Id
-	left join dbo.rScladMaterialOriginal as smo on asl.IdSclad = smo.IdSclad and mo.IdMaterialOriginal = smo.IdMaterialOriginal
-
-
-
-
-
-GO
-GRANT EXECUTE
-    ON OBJECT::[dbo].[r_procPrintedPagesFill] TO [ie\UIT_USERS]
-    AS [dbo];
+	) as p on ms.AssetId = p.AssetId
+END
 
