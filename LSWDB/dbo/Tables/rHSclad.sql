@@ -4,6 +4,7 @@
     [idResponce] BIGINT         NOT NULL,
     [idStatus]   INT            DEFAULT ((0)) NOT NULL,
     [idCompany]  INT            NULL,
+	[idFilial]	 INT			NULL,
     [Gorod]      NVARCHAR (255) NULL,
     [Adress]     NVARCHAR (255) NULL,
     [Office]     NVARCHAR (255) NULL,

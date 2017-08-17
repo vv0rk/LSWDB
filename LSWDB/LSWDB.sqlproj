@@ -3871,9 +3871,12 @@
     <Build Include="dbo\Tables\rBudgetPurchase.sql" />
     <Build Include="dbo\Stored Procedures\sp_ExecDaily.sql" />
     <Build Include="dbo\Stored Procedures\sp_ExecHourly.sql" />
+    <Build Include="dbo\Stored Procedures\sp_SckladAdd.sql" />
+    <Build Include="dbo\Functions\fn_getScladALLos.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="LSWDB.publish.xml" />
+    <None Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="LSWDB.refactorlog" />
