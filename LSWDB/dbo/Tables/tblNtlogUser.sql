@@ -1,7 +1,0 @@
-﻿CREATE TABLE [dbo].[tblNtlogUser] (
-    [LoguserID] INT            IDENTITY (1, 1) NOT NULL,
-    [Loguser]   NVARCHAR (300) NOT NULL,
-    CONSTRAINT [PK_tblntloguser] PRIMARY KEY CLUSTERED ([LoguserID] ASC) WITH (FILLFACTOR = 90, DATA_COMPRESSION = PAGE),
-    CONSTRAINT [IX_tblntloguser] UNIQUE NONCLUSTERED ([Loguser] ASC) WITH (FILLFACTOR = 90, DATA_COMPRESSION = PAGE)
-);
-

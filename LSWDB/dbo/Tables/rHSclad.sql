@@ -1,6 +1,7 @@
 ﻿CREATE TABLE [dbo].[rHSclad] (
     [Id]         INT            IDENTITY (1, 1) NOT NULL,
     [idType]     INT            NOT NULL,
+	[Name]		 NVARCHAR(255)  NULL,
     [idResponce] BIGINT         NOT NULL,
     [idStatus]   INT            DEFAULT ((0)) NOT NULL,
     [idCompany]  INT            NULL,

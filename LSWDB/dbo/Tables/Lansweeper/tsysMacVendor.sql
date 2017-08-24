@@ -1,0 +1,6 @@
+﻿CREATE TABLE [dbo].[tsysMacVendor] (
+    [MAC]    VARCHAR (6)    NOT NULL,
+    [Vendor] NVARCHAR (300) NOT NULL,
+    CONSTRAINT [PK_tsysMacVendor] PRIMARY KEY CLUSTERED ([MAC] ASC) WITH (FILLFACTOR = 90, DATA_COMPRESSION = PAGE)
+);
+

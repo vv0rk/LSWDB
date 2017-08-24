@@ -1,7 +1,0 @@
-﻿CREATE TABLE [dbo].[tblAutorunLoc] (
-    [LocationID] INT            IDENTITY (1, 1) NOT NULL,
-    [Location]   NVARCHAR (400) NULL,
-    CONSTRAINT [PK_tblautorunloc] PRIMARY KEY CLUSTERED ([LocationID] ASC) WITH (FILLFACTOR = 90, DATA_COMPRESSION = PAGE),
-    CONSTRAINT [IX_tblAutorunLoc] UNIQUE NONCLUSTERED ([Location] ASC) WITH (FILLFACTOR = 90, DATA_COMPRESSION = PAGE)
-);
-

@@ -7,4 +7,39 @@
     <Property Name="ParentElementType" Value="SqlTable" />
     <Property Name="NewName" Value="CountYear" />
   </Operation>
+  <Operation Name="Rename Refactor" Key="86fc12d7-b2c7-47ca-aadc-8c5d6c7ff1c0" ChangeDateTime="08/22/2017 02:16:30">
+    <Property Name="ElementName" Value="[dbo].[rNormRM].[Quart]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[rNormRM]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="Quartal" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="f77557a4-705c-4377-ae59-fb07b44a6a2d" ChangeDateTime="08/22/2017 02:17:05">
+    <Property Name="ElementName" Value="[dbo].[rNormRM].[Quartal]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[rNormRM]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="Quart" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="26e36492-359c-431c-aaac-b003d77c05ec" ChangeDateTime="08/22/2017 02:34:37">
+    <Property Name="ElementName" Value="[dbo].[rPlanDeviceClass].[idType]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[rPlanDeviceClass]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="idAssetType" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="413ad8ad-7d1f-4b81-8381-7de4455585da" ChangeDateTime="08/22/2017 02:37:01">
+    <Property Name="ElementName" Value="[dbo].[FK_rPlanDeviceClass_tsysAssetType]" />
+    <Property Name="ElementType" Value="SqlForeignKeyConstraint" />
+    <Property Name="ParentElementName" Value="[dbo].[rPlanDeviceClass]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="[FK_rPlanDeviceClass_tsysAssetTypes]" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="ad8e1243-1894-4c03-a1ad-8196192ae065" ChangeDateTime="08/22/2017 15:58:06">
+    <Property Name="ElementName" Value="[dbo].[rBudgetSprav].[form]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[rBudgetSprav]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="idFormat" />
+  </Operation>
 </Operations>

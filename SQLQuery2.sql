@@ -1,23 +1,20 @@
 ﻿use lansweeperdb;
 
-insert into dbo.rHSclad (idResponce, idType, idCompany )
+
+
 select 
-	e.id
-	, 0
-	, c.id
-from rEmployee as e 
-inner join (
-		select * from rCompany$  where rCompany$.isOrg = 1 ) as c on e.organization = c.IdOU
-left join rHSclad as s on e.id = s.idResponce
-
-where s.Id is null and e.login is not null and e.removed = 0
-
-
---select * 
---from rHSclad as s 
---inner join dbo.rEmployee as e on s.idResponce = e.id
---left join (
---		select * from rCompany$  where rCompany$.isOrg = 1 ) as c on e.organization = c.IdOU
---where c.id is null
-
-
+	e.Org,
+	e.Departament,
+	e.JobTitle,
+	e.Name,
+	t.AssetTypename,
+	ac.Model
+	
+from fn_getEmployee(default) as e
+left join tblAssetCustom as ac on e.Name = ac.Custom11 
+left join tblAssets as a on ac.AssetID = a.AssetID
+left join tsysAssetTypes as t on a.Assettype = t.AssetType
+left join tblState as s on ac.State = s.State
+left join rCompany$ as c on ac.Custom1 = c.Code and e.Org = c.Parent
+Where s.Statename like '%ctive%' or s.Statename like 'stock' or s.Statename like '%repai%' and e.removed = 0
+Order by e.Departament, e.Name
