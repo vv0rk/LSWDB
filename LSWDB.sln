@@ -5,14 +5,16 @@ VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "LSWDB", "LSWDB\LSWDB.sqlproj", "{880652F1-A62A-4B7E-8AA1-A08594D3CB1C}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Scripts", "Scripts", "{0C51C218-C092-4885-81D1-F2CD22195FED}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Scripts", "Scripts", "{3A39CF90-3616-4F59-94BF-D46EFF80F745}"
 	ProjectSection(SolutionItems) = preProject
-		SQLQuery2.sql = SQLQuery2.sql
-		SQLQuery5.sql = SQLQuery5.sql
-		SqlQuery_1.sql = SqlQuery_1.sql
-		Добавление склада.sql = Добавление склада.sql
-		Работающий пример рекурсивного запроса.sql = Работающий пример рекурсивного запроса.sql
-		Разовое обновление данных штатного расписания.sql = Разовое обновление данных штатного расписания.sql
+		Scripts\SQLQuery1.sql = Scripts\SQLQuery1.sql
+		Scripts\SQLQuery2.sql = Scripts\SQLQuery2.sql
+		Scripts\SQLQuery5.sql = Scripts\SQLQuery5.sql
+		Scripts\SqlQuery_1.sql = Scripts\SqlQuery_1.sql
+		Scripts\Добавление склада.sql = Scripts\Добавление склада.sql
+		Scripts\Работающий пример рекурсивного запроса.sql = Scripts\Работающий пример рекурсивного запроса.sql
+		Scripts\Разовое обновление данных штатного расписания.sql = Scripts\Разовое обновление данных штатного расписания.sql
+		Scripts\Рекурсивный запрос.sql = Scripts\Рекурсивный запрос.sql
 	EndProjectSection
 EndProject
 Global

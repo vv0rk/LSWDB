@@ -57,6 +57,32 @@ AS
 	inner join tblAssets as a on ac.AssetID = a.AssetID
 	inner join tsysAssetTypes as t on a.Assettype = t.AssetType
 	left join rModelLink as ml on ac.Model = ml.ModelAsset
-	where ml.Id is null and t.AssetTypename like N'Printer'
+	where ml.Id is null and t.AssetTypename like N'Printer';
+
+	-- добавлено Савин Н.В. 26.08.2017
+	-- обновляем поле Custom9 моделями из справочника, соответствующими 
+	-- tblAssetCustom.Model
+	with c as (
+	select 
+		ac.Custom9 as tgt,
+		ml.ModelSprav as src
+	from tblAssets as a
+	inner join tblAssetCustom as ac on a.AssetID = ac.AssetID
+	inner join tsysAssetTypes as t on a.Assettype = t.AssetType
+	inner join rModelLink as ml on ac.Model = ml.ModelAsset
+	where ac.Custom9 <> ml.ModelSprav and t.AssetTypename like N'Printer'
+	) update c set
+	tgt = src;
+
+	with c as (
+	select 
+		ac.Custom9 as tgt
+	from tblAssets as a
+	inner join tblAssetCustom as ac on a.AssetID = ac.AssetID
+	inner join tsysAssetTypes as t on a.Assettype = t.AssetType
+	where ac.Custom9 <> N'Computer' and t.AssetTypename like N'Windows'
+	) update c set
+	tgt = N'Computer';
+
 
 RETURN 0

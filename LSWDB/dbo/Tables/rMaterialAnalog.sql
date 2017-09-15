@@ -12,43 +12,6 @@
 
 
 GO
-
-Create trigger Trigger_rMaterialAnalog_Insert on dbo.rMaterialAnalog instead of insert
-as
-	begin;
-		insert into dbo.rMaterialAnalog
-		(
-			IdManufacturer
-			, PartNumber
-			, Name
-			, Resource
-			, AltName
-		)
-		select 
-			i.IdManufacturer
-			, i.PartNumber
-			, i.Name
-			, i.Resource
-			, CONCAT(m.ShortName, ' ', i.PartNumber)
-		from inserted as i 
-		inner join dbo.rManufacturer as m on i.IdManufacturer = m.Id
-	end;
-
-
-GO
-
-Create trigger Trigger_rMaterialAnalog_Update on dbo.rMaterialAnalog after update
-as
-	begin;
-
-		update ma set AltName = CONCAT(m.ShortName, ' ', i.PartNumber)
-		from dbo.rMaterialAnalog as ma 
-		inner join inserted as i on i.Id = ma.Id
-		inner join dbo.rManufacturer as m on i.IdManufacturer = m.Id
-	end;
-
-
-GO
 GRANT DELETE
     ON OBJECT::[dbo].[rMaterialAnalog] TO [ie\VT_USERS]
     AS [dbo];

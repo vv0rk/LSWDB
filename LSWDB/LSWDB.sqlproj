@@ -137,6 +137,12 @@
     <Folder Include="dbo\Tables\Аудит" />
     <Folder Include="dbo\Functions\возвращают справочники" />
     <Folder Include="dbo\Stored Procedures\Планирование перемещений" />
+    <Folder Include="dbo\Stored Procedures\Планирование РМ" />
+    <Folder Include="dbo\Functions\Планирование РМ" />
+    <Folder Include="dbo\Stored Procedures\Расход РМ на ассетах" />
+    <Folder Include="dbo\Functions\Планирование оборудования" />
+    <Folder Include="dbo\Functions\Контроль" />
+    <Folder Include="Отчеты для Lansweeper" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="dbo\Tables\rUser.sql">
@@ -336,10 +342,6 @@
       <QuotedIdentifier>On</QuotedIdentifier>
     </Build>
     <Build Include="dbo\Tables\rScladMaterialOriginal.sql">
-      <AnsiNulls>On</AnsiNulls>
-      <QuotedIdentifier>On</QuotedIdentifier>
-    </Build>
-    <Build Include="dbo\Tables\rMaterialRashod.sql">
       <AnsiNulls>On</AnsiNulls>
       <QuotedIdentifier>On</QuotedIdentifier>
     </Build>
@@ -2117,7 +2119,6 @@
     <Build Include="Server Objects\AlwaysOn_health.sql" />
     <Build Include="dbo\Stored Procedures\sp_AddNewMaterialOriginal.sql" />
     <Build Include="dbo\Stored Procedures\sp_AddNewMaterialAnalog.sql" />
-    <Build Include="dbo\Functions\fn_getMaterialOriginal.sql" />
     <Build Include="dbo\Tables\rPrinterMaterialNorm.sql" />
     <Build Include="dbo\Stored Procedures\sp_UpdateNorm.sql" />
     <Build Include="dbo\Functions\fn_getPrinterMaterialNorm.sql" />
@@ -3587,10 +3588,44 @@
     <Build Include="dbo\Stored Procedures\Планирование перемещений\sp_PlanOtkat.sql" />
     <Build Include="dbo\Stored Procedures\Планирование перемещений\sp_PlanApprove.sql" />
     <Build Include="dbo\Tables\Планирование оборудования\rPlanRMTimeSheet.sql" />
+    <Build Include="dbo\Stored Procedures\Планирование перемещений\sp_PlanFixFact.sql" />
+    <Build Include="dbo\Stored Procedures\Планирование РМ\sp_PlanStart.sql" />
+    <Build Include="dbo\Functions\Планирование РМ\fn_getFactRM.sql" />
+    <Build Include="dbo\Functions\Планирование РМ\fn_getComplectsRM.sql" />
+    <Build Include="dbo\Stored Procedures\Планирование РМ\sp_PlanRMCreateToDate.sql" />
+    <Build Include="dbo\Functions\возвращают справочники\fn_getAssetsLSW.sql" />
+    <Build Include="dbo\Functions\возвращают справочники\fn_getMaterialOriginal.sql" />
+    <Build Include="dbo\Functions\возвращают справочники\fn_getMaterialForComplect.sql" />
+    <Build Include="dbo\Functions\возвращают справочники\fn_getRashod.sql" />
+    <Build Include="dbo\Stored Procedures\Расход РМ на ассетах\sp_addNewRashod.sql" />
+    <Build Include="dbo\Stored Procedures\Расход РМ на ассетах\sp_dismissRashod.sql" />
+    <Build Include="dbo\Functions\Планирование оборудования\fn_getCurrentStateAssets.sql" />
+    <Build Include="dbo\Functions\Планирование оборудования\fn_getPlanStateAssetsOnDate.sql" />
+    <Build Include="dbo\Stored Procedures\Планирование перемещений\sp_PlanCreateOnDate.sql" />
+    <Build Include="dbo\Stored Procedures\Планирование РМ\sp_PlanRMCreateOnDate.sql" />
+    <Build Include="dbo\Functions\возвращают справочники\fn_getDateStandart.sql" />
+    <Build Include="dbo\Functions\Планирование РМ\fn_getPrognozRMalgoritm.sql" />
+    <Build Include="dbo\Functions\Планирование оборудования\fn_getPlanStateOneAssetsOnDate.sql" />
+    <Build Include="dbo\Stored Procedures\Планирование РМ\sp_setPlanRMonAsset.sql" />
+    <Build Include="dbo\Functions\возвращают справочники\fn_getPrintedPages.sql" />
+    <Build Include="dbo\Tables\Планирование оборудования\rMaterialRashod.sql">
+      <AnsiNulls>On</AnsiNulls>
+      <QuotedIdentifier>On</QuotedIdentifier>
+    </Build>
+    <Build Include="dbo\Tables\Планирование оборудования\rNormMaterialRashod.sql" />
+    <Build Include="dbo\Stored Procedures\Планирование перемещений\sp_NormRMCreateOnDate.sql" />
+    <Build Include="dbo\Tables\Планирование оборудования\rNormAlgoritm.sql" />
+    <Build Include="dbo\Functions\Планирование РМ\fn_getNormMaterialRashodOnDate.sql" />
+    <Build Include="dbo\Functions\возвращают справочники\fn_getComplectRMAnalog.sql" />
+    <Build Include="dbo\Functions\Контроль\fn_getUSCLKstatus.sql" />
+    <None Include="Отчеты для Lansweeper\ИНВЕНТАРИЗАЦИЯ_ Assets из БУ отсутствующие в LSW.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="LSWDB.publish.xml" />
     <None Include="ReadMe.txt" />
+    <None Include="ЗАДАЧИ ДЛЯ ВЫПОЛНЕНИЯ.txt" />
+    <None Include="Отчеты для Lansweeper\rMaterialRashod.sql" />
+    <None Include="Отчеты для Lansweeper\ИНВЕНТАРИЗАЦИЯ_ Assets с неправильным инв номером.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="LSWDB.refactorlog" />

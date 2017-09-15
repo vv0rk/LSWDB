@@ -259,3 +259,5 @@ GRANT UPDATE
     ON OBJECT::[dbo].[rMaterialOriginal] TO [IE\UIT_USERS_VR]
     AS [dbo];
 
+
+GO

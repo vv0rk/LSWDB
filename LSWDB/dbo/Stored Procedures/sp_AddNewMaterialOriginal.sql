@@ -6,6 +6,7 @@
 	@Manufacturer nvarchar(50) = NULL
 AS
 	Declare @idManufacturer int = 0;
+	--declare @idMaterialOriginal int = null;
 
 	Select @idManufacturer = dbo.rManufacturer.Id from dbo.rManufacturer Where dbo.rManufacturer.ShortName = @Manufacturer
 	-- проверка аргументов производится базой

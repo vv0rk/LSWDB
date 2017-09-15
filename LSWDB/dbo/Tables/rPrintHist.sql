@@ -117,3 +117,7 @@ GRANT UPDATE
     ON OBJECT::[dbo].[rPrintHist] TO [IE\UIT_USERS_VR]
     AS [dbo];
 
+
+GO
+
+CREATE INDEX [IX_rPrintHist_idRashod] ON [dbo].[rPrintHist] (idMaterialRashod)

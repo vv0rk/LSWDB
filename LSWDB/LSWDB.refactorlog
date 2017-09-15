@@ -42,4 +42,25 @@
     <Property Name="ParentElementType" Value="SqlTable" />
     <Property Name="NewName" Value="idFormat" />
   </Operation>
+  <Operation Name="Rename Refactor" Key="fa3684f3-8f08-490b-9ea2-ae08e738950d" ChangeDateTime="08/26/2017 08:36:37">
+    <Property Name="ElementName" Value="[dbo].[rMaterialRashod].[User]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[rMaterialRashod]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="Username" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="6c5c455a-44fa-4b20-87fb-05eddb7c2fd8" ChangeDateTime="09/02/2017 10:33:56">
+    <Property Name="ElementName" Value="[dbo].[rNormMaterialRashod].[id]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[rNormMaterialRashod]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="idAlgoritm" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="fa39b3c2-29e5-4b12-a9fb-ecb8de90bac4" ChangeDateTime="09/02/2017 23:28:20">
+    <Property Name="ElementName" Value="[dbo].[rNormMaterialRashod].[AssetIf]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[rNormMaterialRashod]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="AssetId" />
+  </Operation>
 </Operations>

@@ -138,7 +138,7 @@ AS
 					Set @w = year(getdate()) + 1;
 					Set @w = @w + + '06' + '01';
 					Set @ExDate = Convert(datetime, @w, 112);
-					print @ExDate
+					--print @ExDate
 				end
 			
 			-- создали точку для устройства которое ставим в работу

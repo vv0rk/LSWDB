@@ -1,5 +1,7 @@
 ﻿use lansweeperdb;
 
+go;
+
 with a as (
 select 
 	ac.Department as dtgt

@@ -18,6 +18,7 @@ CREATE TABLE [dbo].[rPlanTimeSheet]
 (
 	[Id] INT NOT NULL PRIMARY KEY identity(1,1), 
     [AssetId] INT NULL, -- устройство которое представлено этим таймшитом
+	[PlanPrint] int null, -- планируемое число отпечатков в квартал
 	[idState] INT NOT NULL default 9, -- статус устройства, по умолчанию устройство получает статус 9. 
     [tgtId] INT NULL, -- устройство, вместо которого планируется установить этот девайс
 	[srcId] INT NULL, -- устройство, которое планируется установить вместо этого девайса
@@ -48,7 +49,8 @@ CREATE TABLE [dbo].[rPlanTimeSheet]
 
 	-- двигаться могут только устройства присутствующие в Lansweeper или только что закупленные
 	CONSTRAINT [FK_rPlanTimeSheet_tblAssets] FOREIGN KEY (AssetId) REFERENCES tblAssets(AssetId) on delete cascade,
-	CONSTRAINT [FK_rPlanTimeSheet_tblState] FOREIGN KEY (idState) REFERENCES tblState(State)
+	CONSTRAINT [FK_rPlanTimeSheet_tblState] FOREIGN KEY (idState) REFERENCES tblState(State), 
+    CONSTRAINT [CK_rPlanTimeSheet_AssetId_ExDate] UNIQUE (AssetId, ExDate)
 )
 
 go
