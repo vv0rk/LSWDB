@@ -1,22 +1,31 @@
-﻿CREATE TABLE [dbo].[rAssetsKsu] (
+﻿/*
+	данные импортируются из КСУ
+*/
+CREATE TABLE [dbo].[rAssetsKsu] (
     [id]               INT              IDENTITY (1, 1) NOT NULL,
     [name]             NVARCHAR (255)   NOT NULL,
     [code]             NVARCHAR (32)    NOT NULL,
+	-- из таблицы rNomenclature
     [nomenclatureId]   INT              NULL,
+	-- из КСУ
     [inventoryNumber]  NVARCHAR (32)    NULL,
     [serialNumber]     NVARCHAR (32)    NULL,
     [mol]              NVARCHAR (255)   NULL,
     [organization]     NVARCHAR (255)   NOT NULL,
+	-- это должно быть связано с rCompany$ !!! Необходим механизм для простановки этого значения
     [companyId]        INT              NOT NULL,
     [account]          NVARCHAR (12)    NULL,
     [count]            INT              NOT NULL,
     [configurationId]  INT              NULL,
+	-- категория заполняется вручную из программы Ивана Наумова для дальнейшей обработки.
     [categoryId]       INT              NULL,
     [room]             NVARCHAR (255)   NULL,
     [user]             NVARCHAR (255)   NULL,
+	-- этот флаг устанавливается в программе Ивана Наумова в процессе простановки категории
     [withCategory]     BIT              NOT NULL,
     [registrationDate] DATETIME         NULL,
     [guid]             UNIQUEIDENTIFIER NULL,
+	-- если запись формировалась вручную это поле заполняется комментарием какого черта это было сделано
     [Comment]          NVARCHAR (255)   NULL,
     PRIMARY KEY CLUSTERED ([id] ASC) WITH (FILLFACTOR = 90),
     CONSTRAINT [FK_rAssetsKsu_rCategory] FOREIGN KEY ([categoryId]) REFERENCES [dbo].[rCategory] ([id]),

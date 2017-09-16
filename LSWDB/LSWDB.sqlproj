@@ -143,6 +143,7 @@
     <Folder Include="dbo\Functions\Планирование оборудования" />
     <Folder Include="dbo\Functions\Контроль" />
     <Folder Include="Отчеты для Lansweeper" />
+    <Folder Include="dbo\Stored Procedures\Личные карточки" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="dbo\Tables\rUser.sql">
@@ -2073,30 +2074,6 @@
       <AnsiNulls>On</AnsiNulls>
       <QuotedIdentifier>On</QuotedIdentifier>
     </Build>
-    <Build Include="dbo\Stored Procedures\sp_HApprove.sql">
-      <AnsiNulls>On</AnsiNulls>
-      <QuotedIdentifier>On</QuotedIdentifier>
-    </Build>
-    <Build Include="dbo\Stored Procedures\sp_HOtkat.sql">
-      <AnsiNulls>On</AnsiNulls>
-      <QuotedIdentifier>On</QuotedIdentifier>
-    </Build>
-    <Build Include="dbo\Stored Procedures\sp_HTransfer.sql">
-      <AnsiNulls>On</AnsiNulls>
-      <QuotedIdentifier>On</QuotedIdentifier>
-    </Build>
-    <Build Include="dbo\Stored Procedures\sp_HApproveSclad.sql">
-      <AnsiNulls>On</AnsiNulls>
-      <QuotedIdentifier>On</QuotedIdentifier>
-    </Build>
-    <Build Include="dbo\Stored Procedures\sp_CreateNewAsset.sql">
-      <AnsiNulls>On</AnsiNulls>
-      <QuotedIdentifier>On</QuotedIdentifier>
-    </Build>
-    <Build Include="dbo\Stored Procedures\sp_DeleteAsset.sql">
-      <AnsiNulls>On</AnsiNulls>
-      <QuotedIdentifier>On</QuotedIdentifier>
-    </Build>
     <Build Include="dbo\User Defined Types\MacList.sql" />
     <Build Include="Security\Permissions.sql" />
     <Build Include="Security\lansweeperuser.sql" />
@@ -2130,7 +2107,6 @@
     <Build Include="dbo\Tables\rBudgetPurchase.sql" />
     <Build Include="dbo\Stored Procedures\sp_ExecDaily.sql" />
     <Build Include="dbo\Stored Procedures\sp_ExecHourly.sql" />
-    <Build Include="dbo\Stored Procedures\sp_SckladAdd.sql" />
     <Build Include="dbo\Functions\fn_getHSclad.sql" />
     <Build Include="dbo\Functions\fn_getEmployee.sql" />
     <Build Include="dbo\Functions\fn_getEmployeeSplited.sql" />
@@ -3619,6 +3595,31 @@
     <Build Include="dbo\Functions\возвращают справочники\fn_getComplectRMAnalog.sql" />
     <Build Include="dbo\Functions\Контроль\fn_getUSCLKstatus.sql" />
     <None Include="Отчеты для Lansweeper\ИНВЕНТАРИЗАЦИЯ_ Assets из БУ отсутствующие в LSW.sql" />
+    <Build Include="dbo\Stored Procedures\Личные карточки\sp_DeleteAsset.sql">
+      <AnsiNulls>On</AnsiNulls>
+      <QuotedIdentifier>On</QuotedIdentifier>
+    </Build>
+    <Build Include="dbo\Stored Procedures\Личные карточки\sp_CreateNewAsset.sql">
+      <AnsiNulls>On</AnsiNulls>
+      <QuotedIdentifier>On</QuotedIdentifier>
+    </Build>
+    <Build Include="dbo\Stored Procedures\Личные карточки\sp_HApprove.sql">
+      <AnsiNulls>On</AnsiNulls>
+      <QuotedIdentifier>On</QuotedIdentifier>
+    </Build>
+    <Build Include="dbo\Stored Procedures\Личные карточки\sp_HApproveSclad.sql">
+      <AnsiNulls>On</AnsiNulls>
+      <QuotedIdentifier>On</QuotedIdentifier>
+    </Build>
+    <Build Include="dbo\Stored Procedures\Личные карточки\sp_HOtkat.sql">
+      <AnsiNulls>On</AnsiNulls>
+      <QuotedIdentifier>On</QuotedIdentifier>
+    </Build>
+    <Build Include="dbo\Stored Procedures\Личные карточки\sp_HTransfer.sql">
+      <AnsiNulls>On</AnsiNulls>
+      <QuotedIdentifier>On</QuotedIdentifier>
+    </Build>
+    <Build Include="dbo\Stored Procedures\Личные карточки\sp_SckladAdd.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="LSWDB.publish.xml" />

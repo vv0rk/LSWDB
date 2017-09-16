@@ -1,11 +1,20 @@
-﻿CREATE TABLE [dbo].[rAssetsImported] (
+﻿/*
+	все действия логируются триггером в rAudit
+*/
+CREATE TABLE [dbo].[rAssetsImported] (
     [id]              INT           IDENTITY (1, 1) NOT NULL,
+	-- связь с родительской записью rAssetsKSU
     [assetKsuId]      INT           NOT NULL,
+	-- связь с записью в tblAssets, связь задается при запуске программы Ивана Наумова
     [assetId]         INT           NULL,
+	-- избыточная связь с tblAssetsCustom
     [assetCustomId]   INT           NULL,
     [isLinked]        BIT           NOT NULL,
+	-- поля инвентарный и серийный номер
+	-- поле инвент № участвует в автоматической связи
     [inventoryNumber] NVARCHAR (32) NULL,
     [serialNumber]    NVARCHAR (32) NULL,
+	-- идентификатор склада (личной карточки) rHSclad 
     [idScl]           INT           NULL,
     [idJournal]       INT           NULL,
     PRIMARY KEY CLUSTERED ([id] ASC) WITH (FILLFACTOR = 90),
