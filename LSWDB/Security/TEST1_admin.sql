@@ -1,3 +1,0 @@
-﻿CREATE LOGIN [TEST1\admin]
-    FROM WINDOWS WITH DEFAULT_LANGUAGE = [русский];
-

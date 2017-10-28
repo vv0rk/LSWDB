@@ -3,19 +3,21 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "LSWDB", "LSWDB\LSWDB.sqlproj", "{880652F1-A62A-4B7E-8AA1-A08594D3CB1C}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Scripts", "Scripts", "{3A39CF90-3616-4F59-94BF-D46EFF80F745}"
 	ProjectSection(SolutionItems) = preProject
+		C:\Users\Nikky\Desktop\sp_ApproveScklad_11102017.txt = C:\Users\Nikky\Desktop\sp_ApproveScklad_11102017.txt
 		Scripts\SQLQuery1.sql = Scripts\SQLQuery1.sql
 		Scripts\SQLQuery2.sql = Scripts\SQLQuery2.sql
 		Scripts\SQLQuery5.sql = Scripts\SQLQuery5.sql
 		Scripts\SqlQuery_1.sql = Scripts\SqlQuery_1.sql
+		ВАЖНЫЕ ЗАМЕЧАНИЯ ПО ПРОИЗВОДСТВЕННОЙ СИСТЕМЕ.txt = ВАЖНЫЕ ЗАМЕЧАНИЯ ПО ПРОИЗВОДСТВЕННОЙ СИСТЕМЕ.txt
 		Scripts\Добавление склада.sql = Scripts\Добавление склада.sql
 		Scripts\Работающий пример рекурсивного запроса.sql = Scripts\Работающий пример рекурсивного запроса.sql
 		Scripts\Разовое обновление данных штатного расписания.sql = Scripts\Разовое обновление данных штатного расписания.sql
 		Scripts\Рекурсивный запрос.sql = Scripts\Рекурсивный запрос.sql
 	EndProjectSection
+EndProject
+Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "LSWDB", "LSWDB\LSWDB.sqlproj", "{880652F1-A62A-4B7E-8AA1-A08594D3CB1C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

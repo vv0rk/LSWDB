@@ -17,11 +17,15 @@ CREATE TABLE [dbo].[rAssetsImported] (
 	-- идентификатор склада (личной карточки) rHSclad 
     [idScl]           INT           NULL,
     [idJournal]       INT           NULL,
+	-- флаг что строка выбрана для слияния, используется при проведении групповых операций над строками
+	-- все строки будут сливаться в строку с номером 1 другие строки будут удалены
+    [isSelected] INT NOT NULL default 0, 
     PRIMARY KEY CLUSTERED ([id] ASC) WITH (FILLFACTOR = 90),
     CONSTRAINT [FK_rAssetsImported_rAssetsKsu] FOREIGN KEY ([assetKsuId]) REFERENCES [dbo].[rAssetsKsu] ([id]),
     CONSTRAINT [FK_rAssetsImported_rHSclad_idScl_Id] FOREIGN KEY ([idScl]) REFERENCES [dbo].[rHSclad] ([Id]),
     CONSTRAINT [FK_rAssetsImported_tblAssetCustom] FOREIGN KEY ([assetCustomId]) REFERENCES [dbo].[tblAssetCustom] ([CustID]),
-    CONSTRAINT [FK_rAssetsImported_tblAssets] FOREIGN KEY ([assetId]) REFERENCES [dbo].[tblAssets] ([AssetID])
+    CONSTRAINT [FK_rAssetsImported_tblAssets] FOREIGN KEY ([assetId]) REFERENCES [dbo].[tblAssets] ([AssetID]), 
+    CONSTRAINT [CK_rAssetsImported_AssetId] UNIQUE (AssetId) 
 );
 
 

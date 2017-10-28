@@ -22,10 +22,9 @@ RETURNS @retEmployee TABLE
 AS
 BEGIN
 
-
-	with job (level, title, id, parent_id, name, login, jobtitle, org, idShtat, email, removed, removal_date, idp) as (
+	with job (level, title, id, parent_id, name, login, jobtitle, org, idShtat, email, removed, isRemoved , removal_date, idp) as (
 		-- закрепленная часть 
-		select 	0 as level, o.title, o.id, o.parent_id, e.title, e.login, e.post, c.Parent, e.parent_id, e.email, e.removed, e.removal_date, e.id
+		select 	0 as level, o.title, o.id, o.parent_id, e.title, e.login, e.post, c.Parent, e.parent_id, e.email, e.removed, e.isremoved, e.removal_date, e.id
 		from dbo.rOU as o 
 		inner join dbo.rEmployee as e on o.id = e.parent_id
 		inner join (
@@ -36,17 +35,28 @@ BEGIN
 		--Where e.title like N'Савин Николай Влади%'
 		--Where o.parent_id is null
 		union all 
-		select level + 1, t.title + N'\' + j.title, t.id, t.parent_id, j.name, j.login, j.jobtitle, j.org, j.idShtat, j.email, j.removed, j.removal_date, j.idp
+		select level + 1, t.title + N'\' + j.title, t.id, t.parent_id, j.name, j.login, j.jobtitle, j.org, j.idShtat, j.email, j.removed, j.isRemoved, j.removal_date, j.idp
 		from job as j
 		inner join rOU as t on j.parent_id = t.id
 		where j.parent_id is not null
 	)
 
 	INSERT @retEmployee
-	select s.id, s.org, SUBSTRING(s.title, 0, 254), s.jobtitle, s.name, s.login, s.idShtat, s.email, s.removed, s.removal_date, s.idp
+	select s.id, s.org, SUBSTRING(s.title, 0, 254), s.jobtitle, s.name, s.login, s.idShtat, s.email, 
+		case
+			when s.removed > 0 
+				then 1
+			else 
+				case 
+					when s.isRemoved > 0
+						then 1
+					else 0
+				end
+			end
+	 as removed, 
+	s.removal_date, s.idp
 	from job as s
 	where s.parent_id is null
 
-	-- здесь разделяем Departament по нескольким уровням
 	RETURN
 END

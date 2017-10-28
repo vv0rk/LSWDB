@@ -1,8 +1,12 @@
 ﻿CREATE TABLE [dbo].[rHJournal] (
     [Id]           INT            IDENTITY (1, 1) NOT NULL,
+	-- ассет который двигаем.
     [idAsset]      INT            NOT NULL,
+	-- склад из которого перемещаем ассет
     [idScl1]       INT            NULL,
+	-- склад на который падает ассет
     [idScl2]       INT            NULL,
+	-- ссылка не предыдущую запись
     [idJprev]      INT            NULL,
     [idStatus]     INT            NOT NULL,
     [userCreate]   NVARCHAR (255) NULL,

@@ -1,2 +1,0 @@
-﻿CREATE USER [ie\UIT_USERS];
-

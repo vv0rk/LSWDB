@@ -9,6 +9,12 @@ AS
 
 	SELECT @userApprove = SYSTEM_USER, @dateApprove = GETDATE()
 
+	IF @userApprove not like '%savin%' and @userApprove not like '%poneveg%' and @userApprove not like '%nikky%' and @userApprove not like '%debug%' 
+		begin
+			raiserror( N'Вы не имеете права подтверждать перемещение. Обратитесь в ОУИТа', 13, 1);
+			return 1;
+		end
+
 	Select @idJ = ai.idJournal
 		from dbo.rAssetsImported as ai
 		where ai.id = @idAsset;
@@ -42,41 +48,4 @@ AS
 
 RETURN 1
 
-
-
-
-GO
-GRANT EXECUTE
-    ON OBJECT::[dbo].[sp_HApprove] TO [ie\VT_USERS]
-    AS [dbo];
-
-
-GO
-GRANT VIEW DEFINITION
-    ON OBJECT::[dbo].[sp_HApprove] TO [ie\VT_USERS]
-    AS [dbo];
-
-
-GO
-GRANT EXECUTE
-    ON OBJECT::[dbo].[sp_HApprove] TO [ie\UIT_USERS]
-    AS [dbo];
-
-
-GO
-GRANT VIEW DEFINITION
-    ON OBJECT::[dbo].[sp_HApprove] TO [ie\UIT_USERS]
-    AS [dbo];
-
-
-GO
-GRANT EXECUTE
-    ON OBJECT::[dbo].[sp_HApprove] TO [IE\UIT_USERS_VR]
-    AS [dbo];
-
-
-GO
-GRANT VIEW DEFINITION
-    ON OBJECT::[dbo].[sp_HApprove] TO [IE\UIT_USERS_VR]
-    AS [dbo];
 

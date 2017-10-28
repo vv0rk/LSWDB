@@ -20,7 +20,8 @@ RETURNS @getHSclad TABLE
 	Office  nvarchar(255) null,
 	Removed bit null,
 	idFilial int null,
-	Login nvarchar(255) null
+	Login nvarchar(255) null,
+	email nvarchar(255) null
 
 )
 as 
@@ -45,6 +46,7 @@ begin
 				, e.removed
 				, c.id
 				, e.login
+				, e.email
 			from rHSclad as s 
 			left join rHScladType as t on s.idType = t.Id
 			left join rHScladStatus as hs on s.idStatus = hs.Id 
@@ -72,6 +74,7 @@ begin
 				, e.removed
 				, c.id
 				, e.login
+				, e.email
 			from rHSclad as s 
 			left join rHScladType as t on s.idType = t.Id
 			left join rHScladStatus as hs on s.idStatus = hs.Id 
@@ -100,6 +103,7 @@ begin
 				, e.removed
 				, c.id
 				, e.login
+				, e.email
 			from rHSclad as s 
 			left join rHScladType as t on s.idType = t.Id
 			left join rHScladStatus as hs on s.idStatus = hs.Id 

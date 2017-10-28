@@ -1980,13 +1980,6 @@
       <AnsiNulls>On</AnsiNulls>
       <QuotedIdentifier>On</QuotedIdentifier>
     </Build>
-    <Build Include="Security\VT_USERS Role.sql" />
-    <Build Include="Security\UIT_USERS Role.sql" />
-    <Build Include="Security\IE_perlovskii.sql" />
-    <Build Include="Security\IE_savinnv.sql" />
-    <Build Include="Security\ie_VT_USERS.sql" />
-    <Build Include="Security\ie_UIT_USERS.sql" />
-    <Build Include="Security\IE_UIT_USERS_VR.sql" />
     <Build Include="Security\RoleMemberships.sql" />
     <Build Include="dbo\Functions\fn_getAssets.sql">
       <AnsiNulls>On</AnsiNulls>
@@ -2038,12 +2031,8 @@
     </Build>
     <Build Include="dbo\User Defined Types\MacList.sql" />
     <Build Include="Security\Permissions.sql" />
-    <Build Include="Security\lansweeperuser.sql" />
     <Build Include="Storage\lansweeperdb_log.sql" />
     <Build Include="Storage\lansweeperdb.sql" />
-    <Build Include="Security\TEST1_nikky.sql" />
-    <Build Include="Security\TEST1_debug.sql" />
-    <Build Include="Security\TEST1_admin.sql" />
     <Build Include="Security\sa.sql" />
     <Build Include="Security\NT SERVICE_Winmgmt.sql" />
     <Build Include="Security\NT SERVICE_SQLWriter.sql" />
@@ -2051,9 +2040,7 @@
     <Build Include="Security\NT SERVICE_SQLSERVERAGENT.sql" />
     <Build Include="Security\NT Service_MSSQLSERVER.sql" />
     <Build Include="Security\NT AUTHORITY_СИСТЕМА.sql" />
-    <Build Include="Security\lansweeperuser_1.sql" />
     <Build Include="Service Broker\AutoCreatedLocal.sql" />
-    <Build Include="Security\lansweeperuser_2.sql" />
     <Build Include="Server Objects\telemetry_xevents.sql" />
     <Build Include="Server Objects\AlwaysOn_health.sql" />
     <Build Include="dbo\Stored Procedures\sp_AddNewMaterialOriginal.sql" />
@@ -3622,6 +3609,8 @@
       <AnsiNulls>On</AnsiNulls>
       <QuotedIdentifier>On</QuotedIdentifier>
     </Build>
+    <Build Include="dbo\Functions\fn_getAssetsForLKLinkByUserLogin.sql" />
+    <Build Include="dbo\Functions\fn_getAssetsForLKLink.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="LSWDB.publish.xml" />

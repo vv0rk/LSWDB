@@ -3,6 +3,7 @@
     [idType]     INT            NOT NULL,
 	[Name]		 NVARCHAR(255)  NULL,
     [idResponce] BIGINT         NOT NULL,
+	-- статус склада
     [idStatus]   INT            DEFAULT ((0)) NOT NULL,
     [idCompany]  INT            NULL,
 	[idFilial]	 INT			NULL,
