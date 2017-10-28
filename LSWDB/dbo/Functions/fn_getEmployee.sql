@@ -1,4 +1,19 @@
-﻿CREATE FUNCTION [dbo].[fn_getEmployee]
+﻿/**
+    * Summary.
+    *
+    * Возвращает информацию о сотрудниках из таблицы rEmployee
+    *
+    * @param nvarchar(255) @Org - код организации. Не используется
+    *
+    * @return TABLE 
+    *   таблица сотрудников 
+    *   
+    *   @id int идентификатор пользователя. Таблица rOU.id
+    *   @Org nvarchar(255) код родительской организации. Таблица rCompany$.Parent
+    *   @Departament nvarchar(255) подразделение. Таблица rOU.title сформировано рекурсивным запросом разделение \
+    *   
+*/
+CREATE FUNCTION [dbo].[fn_getEmployee]
 (
 	-- возвращает информацию о сотрудниках 
 	@Org nvarchar(255) = null
@@ -6,7 +21,7 @@
 )
 RETURNS @retEmployee TABLE
 (
-	id int,								-- Идентификатор пользователя
+	id int,								-- Идентификатор подразделения
 	Org nvarchar(255) null,				-- Организация из rCompany$.Parent
 	Departament nvarchar(255) null,		-- Департамент сформирован как строка где подразделения разделены \
 	JobTitle nvarchar(255) null,		-- должность
@@ -17,7 +32,6 @@ RETURNS @retEmployee TABLE
 	removed bit null,					-- 0 сотрудник работает, не 0 уволен или еще чтото
 	removal_date datetime null,			-- дата увольнения сотрудника
 	idp int null						-- идентификатор пользователя
-
 )
 AS
 BEGIN
@@ -48,7 +62,7 @@ BEGIN
 				then 1
 			else 
 				case 
-					when s.isRemoved > 0
+					when s.isRemoved > 0 
 						then 1
 					else 0
 				end

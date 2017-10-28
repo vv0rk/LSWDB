@@ -3611,6 +3611,8 @@
     </Build>
     <Build Include="dbo\Functions\fn_getAssetsForLKLinkByUserLogin.sql" />
     <Build Include="dbo\Functions\fn_getAssetsForLKLink.sql" />
+    <None Include="Отчеты для Lansweeper\КОНТРОЛЬ_ Login в Lansweeper не соответствует rEmployee.sql" />
+    <Build Include="dbo\Stored Procedures\sp_AddAssetUserRelation.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="LSWDB.publish.xml" />
