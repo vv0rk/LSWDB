@@ -441,7 +441,7 @@ BEGIN
 	IF EXISTS (
 				select * 
 				from deleted as a
-				inner join dbo.rActiveCategory1 as ac on a.AssetID = ac.AssetId
+				inner join dbo.rAssetsImported as ac on a.AssetID = ac.AssetId
 				)
 	BEGIN
 		RAISERROR (N'Этот Ассет связан с устройством rActiveCategory1 и запрещен к удалению',10,1)

@@ -38,16 +38,16 @@ AS
 	-- добавлено Савин Н.В. 18.08.2017 6:00
 	-- создаем личные карточки для вновь появившихся сотрудников
 	-- только сотрудников у которых имеется логин
-	insert into dbo.rHSclad (idResponce, idType, idCompany )
-	select 
-		e.id
-		, 0
-		, c.id
-	from rEmployee as e 
-	inner join (
-			select * from rCompany$  where rCompany$.isOrg = 1 ) as c on e.organization = c.IdOU
-	left join rHSclad as s on e.id = s.idResponce
-	where s.Id is null and e.login is not null and e.removed = 0
+	--insert into dbo.rHSclad (idResponce, idType, idCompany )
+	--select 
+	--	e.id
+	--	, 0
+	--	, c.id
+	--from rEmployee as e 
+	--inner join (
+	--		select * from rCompany$  where rCompany$.isOrg = 1 ) as c on e.organization = c.IdOU
+	--left join rHSclad as s on e.id = s.idResponce
+	--where s.Id is null and e.login is not null and e.removed = 0
 
 	-- добавлено Савин Н.В. 22.08.2017 
 	-- добавляем в справочник МФУ вновь появившиеся модели устройств в справочник
@@ -86,11 +86,12 @@ AS
 
 	-- добавлено Савин Н.В. 26.08.2017
 	-- удаляем журнал старше 1 месяца в rAudit 
-	delete from dbo.rAudit where (year(dbo.rAudit.updatedate)*12 + month(dbo.rAudit.updatedate)) < (year(getdate())*12 + month(getdate())-12)
+	--delete from dbo.rAudit where (year(dbo.rAudit.updatedate)*12 + month(dbo.rAudit.updatedate)) < (year(getdate())*12 + month(getdate())-12)
 
 	-- добавлено Савин Н.В. 24.10.2017
 	-- добавляем привязку оборудования к пользователю на основе данных в поле Custom17 (Login)
-	exec sp_AddAssetUserRelations
+	-- заблокировано 16.04.2018 Савин Н.В. создание только в ручном режиме.
+	-- exec sp_AddAssetUserRelations
 
 
 RETURN 0

@@ -1,8 +1,20 @@
 ﻿CREATE TABLE [dbo].[rHSclad] (
     [Id]         INT            IDENTITY (1, 1) NOT NULL,
+    -- тип склада:
+    -- ЛК - личная карточка, формируется для сотрудника. Сотрудник отвечает за оборудование.
+    -- ЦС - центральный склад, формируестя для кладовой. Назначается ответственный за кладовую
+    -- АК - Аппаратная комната. Формируется для установки работающего оборудования. Серверная, кроссовая, помещение аудиторов ... 
     [idType]     INT            NOT NULL,
+    -- Общепринятое название (если имеется)
 	[Name]		 NVARCHAR(255)  NULL,
-    [idResponce] BIGINT         NOT NULL,
+    -- ответственный за оборудование склада. 
+    -- ЛК - это сотрудник
+    -- ЦС - МОЛ назначенный со стороны УСЦ
+    -- АК - сотрудник ответственный за сохранность оборудования в этой комнате.
+    [idResponce] BIGINT         NULL,
+    -- login для создания склада в ручную при отсутствии пользователя в наумене
+    [login_resp] nvarchar(100) null,
+    [fio_resp] nvarchar(255) default (N'') not null,
 	-- статус склада
     [idStatus]   INT            DEFAULT ((0)) NOT NULL,
     [idCompany]  INT            NULL,
@@ -10,10 +22,12 @@
     [Gorod]      NVARCHAR (255) NULL,
     [Adress]     NVARCHAR (255) NULL,
     [Office]     NVARCHAR (255) NULL,
+    [idLK] BIGINT NULL, 
     PRIMARY KEY CLUSTERED ([Id] ASC),
     CONSTRAINT [FK_rHSclad_rCompany_idCompany_id] FOREIGN KEY ([idCompany]) REFERENCES [dbo].[rCompany$] ([id]),
     CONSTRAINT [FK_rHSclad_rHScladStatus_idStatus_id] FOREIGN KEY ([idStatus]) REFERENCES [dbo].[rHScladStatus] ([Id]),
-    CONSTRAINT [FK_rHSclad_rHScladType_idType_Id] FOREIGN KEY ([idType]) REFERENCES [dbo].[rHScladType] ([Id])
+    CONSTRAINT [FK_rHSclad_rHScladType_idType_Id] FOREIGN KEY ([idType]) REFERENCES [dbo].[rHScladType] ([Id]), 
+    CONSTRAINT [FK_rHSclad_rHScladIdHistory] FOREIGN KEY ([idLK]) REFERENCES [rHScladIdHistory]([Id])
 );
 
 
@@ -156,74 +170,13 @@ select ''' + @Type + ''','''
 END
 
 
-GO
-GRANT DELETE
-    ON OBJECT::[dbo].[rHSclad] TO [ie\VT_USERS]
-    AS [dbo];
-
 
 GO
-GRANT INSERT
-    ON OBJECT::[dbo].[rHSclad] TO [ie\VT_USERS]
-    AS [dbo];
+
+CREATE UNIQUE NONCLUSTERED INDEX [IX_rHSclad_login_resp] ON [dbo].[rHSclad] (idType, Name, [login_resp]) WHERE ([login_resp] is not null and idType <> 0 and Name is not null);
+
 
 
 GO
-GRANT SELECT
-    ON OBJECT::[dbo].[rHSclad] TO [ie\VT_USERS]
-    AS [dbo];
 
-
-GO
-GRANT UPDATE
-    ON OBJECT::[dbo].[rHSclad] TO [ie\VT_USERS]
-    AS [dbo];
-
-
-GO
-GRANT DELETE
-    ON OBJECT::[dbo].[rHSclad] TO [ie\UIT_USERS]
-    AS [dbo];
-
-
-GO
-GRANT INSERT
-    ON OBJECT::[dbo].[rHSclad] TO [ie\UIT_USERS]
-    AS [dbo];
-
-
-GO
-GRANT SELECT
-    ON OBJECT::[dbo].[rHSclad] TO [ie\UIT_USERS]
-    AS [dbo];
-
-
-GO
-GRANT UPDATE
-    ON OBJECT::[dbo].[rHSclad] TO [ie\UIT_USERS]
-    AS [dbo];
-
-
-GO
-GRANT DELETE
-    ON OBJECT::[dbo].[rHSclad] TO [IE\UIT_USERS_VR]
-    AS [dbo];
-
-
-GO
-GRANT INSERT
-    ON OBJECT::[dbo].[rHSclad] TO [IE\UIT_USERS_VR]
-    AS [dbo];
-
-
-GO
-GRANT SELECT
-    ON OBJECT::[dbo].[rHSclad] TO [IE\UIT_USERS_VR]
-    AS [dbo];
-
-
-GO
-GRANT UPDATE
-    ON OBJECT::[dbo].[rHSclad] TO [IE\UIT_USERS_VR]
-    AS [dbo];
-
+CREATE UNIQUE NONCLUSTERED INDEX [IX_rHSclad_idLK] ON [dbo].[rHSclad] ([idLK]) WHERE idLK is not NULL;

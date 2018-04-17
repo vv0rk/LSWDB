@@ -3542,7 +3542,6 @@
     <Build Include="dbo\Tables\Планирование оборудования\rNormAlgoritm.sql" />
     <Build Include="dbo\Functions\Планирование РМ\fn_getNormMaterialRashodOnDate.sql" />
     <Build Include="dbo\Functions\возвращают справочники\fn_getComplectRMAnalog.sql" />
-    <Build Include="dbo\Functions\Контроль\fn_getUSCLKstatus.sql" />
     <None Include="Отчеты для Lansweeper\ИНВЕНТАРИЗАЦИЯ_ Assets из БУ отсутствующие в LSW.sql" />
     <Build Include="dbo\Stored Procedures\Личные карточки\sp_DeleteAsset.sql">
       <AnsiNulls>On</AnsiNulls>
@@ -3568,7 +3567,10 @@
       <AnsiNulls>On</AnsiNulls>
       <QuotedIdentifier>On</QuotedIdentifier>
     </Build>
-    <Build Include="dbo\Stored Procedures\Личные карточки\sp_SckladAdd.sql" />
+    <Build Include="dbo\Stored Procedures\Личные карточки\sp_SckladAdd.sql">
+      <AnsiNulls>On</AnsiNulls>
+      <QuotedIdentifier>On</QuotedIdentifier>
+    </Build>
     <Build Include="dbo\Tables\Движение ТМЦ по ЛК\rHJournal.sql">
       <AnsiNulls>On</AnsiNulls>
       <QuotedIdentifier>On</QuotedIdentifier>
@@ -3613,6 +3615,16 @@
     <Build Include="dbo\Functions\fn_getAssetsForLKLink.sql" />
     <None Include="Отчеты для Lansweeper\КОНТРОЛЬ_ Login в Lansweeper не соответствует rEmployee.sql" />
     <Build Include="dbo\Stored Procedures\sp_AddAssetUserRelation.sql" />
+    <Build Include="dbo\Functions\возвращают справочники\fn_getLastJournalRecords.sql" />
+    <Build Include="dbo\Tables\Движение ТМЦ по ЛК\rHScladIdHistory.sql">
+      <AnsiNulls>On</AnsiNulls>
+      <QuotedIdentifier>On</QuotedIdentifier>
+    </Build>
+    <Build Include="dbo\Functions\fn_getLastHJournalRecords.sql" />
+    <Build Include="dbo\Functions\fn_getSpecificationForLKext.sql" />
+    <Build Include="dbo\Functions\Контроль\fn_getUSCLKstatus.sql" />
+    <Build Include="dbo\Tables\vw_getSpecificationForLKext.sql" />
+    <Build Include="dbo\Functions\fn_getAssetName.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="LSWDB.publish.xml" />

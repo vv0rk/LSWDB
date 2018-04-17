@@ -28,6 +28,8 @@ AS
 		declare @dateCreate datetime = NULL;
 		declare @sclStatus1 int = NULL;
 		declare @sclStatus2 int = null;
+		declare @idLK1 bigint = null;
+		declare @idLK2 bigint = null; 
 
 		SELECT @userCreate = SYSTEM_USER, @dateCreate = GETDATE()
 
@@ -49,7 +51,15 @@ AS
 				return 1;
 			END
 
-		-- если задан ассет из Lansweeper, то сначала создаем запись в rAssetsImported
+		-- ищем @idAsset
+		IF @idAsset is null and @AssetId is not null
+			BEGIN
+				select @idAsset = id
+				from rAssetsImported 
+				where AssetID = @AssetId;
+			END
+
+		-- создание ассета в rAssetsImported
 		IF @AssetId is not null and @idAsset is null
 			BEGIN
 			-- вставка в rAssetsKsu
@@ -68,6 +78,45 @@ AS
 				declare @date as datetime;
 				declare @idksu as int;
 
+				-- по типу устройства и физическим данным формируем имя устройства
+				declare @typename nvarchar(50) = null;
+				declare @ostype nvarchar(50) = null;
+				declare @model nvarchar(50) = null;
+				declare @modelmfu nvarchar(50) = null;
+				declare @memory float = null;
+				declare @cpu nvarchar(50) = null;
+				declare @ret nvarchar(255) = null;
+
+
+				select @typename = dt.AssetTypename, @ostype = dt.Caption, @model = dt.Model, @memory = dt.Memory, @cpu = dt.CPU, @modelmfu = dt.Custom9
+					From (
+						Select 
+  							tblAssets.AssetID As AssetId,
+							tsysAssetTypes.AssetTypename,
+							os.Caption, 
+							CASE
+							WHEN tblProcessor.Name is not null then 
+								CASE
+									WHEN PATINDEX('%[0-9].[0-9.][0-9.]GHz', tblProcessor.Name ) > 2 then REPLACE(REPLACE(REPLACE(LEFT( tblProcessor.Name, PATINDEX('%[0-9].[0-9.][0-9.]GHz', tblProcessor.Name ) - 1), N'Intel ', N''), N' CPU', N''), N'@ ', N'')
+								END
+							END as CPU,
+							convert(float, tblAssets.Memory / 1024) as Memory,
+							tblAssetCustom.Model,
+							tblAssetCustom.Custom9 
+						From tblAssets
+							inner Join tblAssetCustom On tblAssets.AssetID = tblAssetCustom.AssetID
+							inner Join tsysAssetTypes On tsysAssetTypes.AssetType = tblAssets.Assettype
+							left Join tblState On tblState.State = tblAssetCustom.State
+							left Join tblOperatingsystem As os On dbo.tblAssetCustom.AssetID = os.AssetID
+							left Join tblProcessor On tblAssets.AssetID = tblProcessor.AssetID ) as dt
+					where dt.AssetID = @AssetId
+
+			-- формирую имя устройства из его характеристик
+			Select @ret = AssetName
+			from fn_getAssetName(@AssetId);
+
+			-- имя сформировано в @ret
+
 				Select 
 					@name = a.AssetName,
 					@inventoryNum = ac.Custom7,
@@ -82,6 +131,9 @@ AS
 				Where a.AssetID = @AssetId
 
 				Select @guid = NEWID(), @date = GETDATE();
+
+				-- назначаем для вставки сформированное имя
+				Set @name = @ret
 
 				-- проверка необходимых аргументов
 				IF @name is null or @inventoryNum is null or @orgOwner is null or @orgUser is null 
@@ -157,19 +209,46 @@ AS
 
 			END
 		
+		-- формируем имя и обновляем его в таблице rAssetsKSU для ЛК
+		IF @AssetId is null
+			begin 
+				Select @AssetId = ai.assetId
+				from rAssetsImported as ai
+				where ai.id = @idAsset
+			end
+
+		Select @ret = an.AssetName
+		from fn_getAssetName( @AssetId ) as an;
+
+		declare @idrAssetsKSU int = null;
+
+		select @idrAssetsKSU = k.id
+		from rAssetsImported as ai
+		inner join rAssetsKsu as k on ai.assetKsuId = k.id
+		where ai.id = @idAsset;
+
+		IF @ret is null
+			begin
+				select @ret = k.name
+				from rAssetsKsu as k
+				where k.id = @idrAssetsKSU
+			end
+
+		update dbo.rAssetsKsu 
+		set name = @ret
+		where id = @idrAssetsKSU;
+		
 		-- контроль связанности записей в журнале, должна быть определена цепочка событий для 
 		-- находим идентификатор записи спецификации для данного асета
 		-- проверяем, что запись в журнале с параметрами @idAsset, @idScl2 существует
-
-		-- из ассета получаем текущие склад и запись в журнале 
 		set @idScl1 = (select ai.idScl 
 							from rAssetsImported as ai 
 							where ai.id = @idAsset);
+
 		-- последняя запись в журнале
 		set @idJPrev = (select ai.idJournal 
 							from rAssetsImported as ai 
 							where ai.id = @idAsset);
-		--======================================================
 		-- RAISERROR (N'@idJPrev %u', 11, 1, @idJPrev);
 
 		IF @idScl1 = @idScl2 
@@ -185,11 +264,12 @@ AS
 			from dbo.rHJournal as j
 			Where j.Id = @idJprev;
 
-		IF ( @Statusprev = 1 ) and not ( @userCreate like N'%savin%' or @userCreate like N'%poneve%' or @userCreate like N'%nikk%' or @userCreate like N'%debug%' )
-			begin
-				raiserror (N'Предыдущее перемещение не было одобрено! Зарегистрируйте ЛК у Савина/Поневежского или произведите отмену.', 18, 5);
-				return 1;
-			end
+		-- 29/10/2017 проверка предыдущего одобрения отменена. Главное чтобы конечное состояние было зафиксировано 
+		--IF ( @Statusprev = 1 ) and not ( @userCreate like N'%savin%' or @userCreate like N'%poneve%' or @userCreate like N'%nikk%' or @userCreate like N'%debug%' )
+		--	begin
+		--		raiserror (N'Предыдущее перемещение не было одобрено!', 18, 5);
+		--		return 1;
+		--	end
 
 		-- текущий статус хранилищ для фиксирования в журнале
 		Select @sclStatus1 = s.idStatus
@@ -200,37 +280,69 @@ AS
 			from rHSclad as s 
 			Where s.id = @idScl2;
 
-		-- запись в журнале о перемещении
+		-- текущий номер ЛК
+		Select @idLK1 = s.idLK
+			from rHSclad as s 
+			Where s.id = @idScl1;
+
+		Select @idLK2 = s.idLK
+			from rHSclad as s 
+			Where s.id = @idScl2;
+
+
 		IF @idJprev is null
 			BEGIN
-				INSERT INTO dbo.rHJournal( idAsset, idScl1, idSclStatus1, idScl2, idSclStatus2, idStatus, userCreate, dateCreate)
-				VALUES (@idAsset, @idScl1, @sclStatus1,  @idScl2, @sclStatus2, 1,  @userCreate, @dateCreate)
+				INSERT INTO dbo.rHJournal( idAsset, idScl1, idSclStatus1, idScl2, idSclStatus2, idStatus, userCreate, dateCreate, idLK1, idLK2)
+				VALUES (@idAsset, @idScl1, @sclStatus1,  @idScl2, @sclStatus2, 1,  @userCreate, @dateCreate, @idLK1, @idLK2)
 			END
 		ELSE
 			BEGIN
-				INSERT INTO dbo.rHJournal( idAsset, idScl1, idSclStatus1, idScl2, idSclStatus2, idJprev, idStatus, userCreate, dateCreate)
-				VALUES (@idAsset, @idScl1, @sclStatus1, @idScl2, @sclStatus2, @idJprev, 1,  @userCreate, @dateCreate)
+				INSERT INTO dbo.rHJournal( idAsset, idScl1, idSclStatus1, idScl2, idSclStatus2, idJprev, idStatus, userCreate, dateCreate, idLK1, idLK2)
+				VALUES (@idAsset, @idScl1, @sclStatus1, @idScl2, @sclStatus2, @idJprev, 1,  @userCreate, @dateCreate, @idLK1, @idLK2)
 			END
 		Select @idJ = @@IDENTITY
 
-		-- пишем в ассет новый склад и запись в журнале. 
+		-- обновляем хранилище у асета и устанавливаем ссылку 
 		update dbo.rAssetsImported 
 		SET idScl = @idScl2,
 			idJournal = @idJ
 		Where dbo.rAssetsImported.id = @idAsset
 
+		-- генерим новые номера ЛК
+		IF @sclStatus1 <> 3 
+			begin
+				insert into dbo.rHScladIdHistory (Name)
+				values (N'');
+				Select @idLK1 = @@IDENTITY
+			end
+
+		IF @sclStatus2 <> 3
+			begin
+				insert into dbo.rHScladIdHistory (Name)
+				values (N'');
+				Select @idLK2 = @@IDENTITY
+			end
+
+		-- меняем идентификаторы хранилищ которые участвовали в обмене
+		update dbo.rHSclad
+		SET idLK = @idLK2
+		Where dbo.rHSclad.Id = @idScl2
+
+		update dbo.rHSclad
+		SET idLK = @idLK1
+		Where dbo.rHSclad.Id = @idScl1
+
 		-- меняем статус у хранилищ, которые участвовали в обмене 
 		-- ЛК не одобрена. ЛК одобряется в sp_HApprove
-		-- склад источник
-			update dbo.rHSclad
-			SET idStatus = 3
-			Where dbo.rHSclad.Id = @idScl1
-		-- склад приемник
-			update dbo.rHSclad
-			SET idStatus = 3
-			Where dbo.rHSclad.Id = @idScl2
+		update dbo.rHSclad
+		SET idStatus = 3
+		Where dbo.rHSclad.Id = @idScl2
 
+		update dbo.rHSclad
+		SET idStatus = 3
+		Where dbo.rHSclad.Id = @idScl1
 
 		return 0;
+
 	END;
 GO

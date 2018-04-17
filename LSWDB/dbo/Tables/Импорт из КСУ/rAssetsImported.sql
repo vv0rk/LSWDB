@@ -25,7 +25,6 @@ CREATE TABLE [dbo].[rAssetsImported] (
     CONSTRAINT [FK_rAssetsImported_rHSclad_idScl_Id] FOREIGN KEY ([idScl]) REFERENCES [dbo].[rHSclad] ([Id]),
     CONSTRAINT [FK_rAssetsImported_tblAssetCustom] FOREIGN KEY ([assetCustomId]) REFERENCES [dbo].[tblAssetCustom] ([CustID]),
     CONSTRAINT [FK_rAssetsImported_tblAssets] FOREIGN KEY ([assetId]) REFERENCES [dbo].[tblAssets] ([AssetID]), 
-    CONSTRAINT [CK_rAssetsImported_AssetId] UNIQUE (AssetId) 
 );
 
 
@@ -169,73 +168,5 @@ END
 
 
 GO
-GRANT DELETE
-    ON OBJECT::[dbo].[rAssetsImported] TO [ie\VT_USERS]
-    AS [dbo];
 
-
-GO
-GRANT INSERT
-    ON OBJECT::[dbo].[rAssetsImported] TO [ie\VT_USERS]
-    AS [dbo];
-
-
-GO
-GRANT SELECT
-    ON OBJECT::[dbo].[rAssetsImported] TO [ie\VT_USERS]
-    AS [dbo];
-
-
-GO
-GRANT UPDATE
-    ON OBJECT::[dbo].[rAssetsImported] TO [ie\VT_USERS]
-    AS [dbo];
-
-
-GO
-GRANT DELETE
-    ON OBJECT::[dbo].[rAssetsImported] TO [ie\UIT_USERS]
-    AS [dbo];
-
-
-GO
-GRANT INSERT
-    ON OBJECT::[dbo].[rAssetsImported] TO [ie\UIT_USERS]
-    AS [dbo];
-
-
-GO
-GRANT SELECT
-    ON OBJECT::[dbo].[rAssetsImported] TO [ie\UIT_USERS]
-    AS [dbo];
-
-
-GO
-GRANT UPDATE
-    ON OBJECT::[dbo].[rAssetsImported] TO [ie\UIT_USERS]
-    AS [dbo];
-
-
-GO
-GRANT DELETE
-    ON OBJECT::[dbo].[rAssetsImported] TO [IE\UIT_USERS_VR]
-    AS [dbo];
-
-
-GO
-GRANT INSERT
-    ON OBJECT::[dbo].[rAssetsImported] TO [IE\UIT_USERS_VR]
-    AS [dbo];
-
-
-GO
-GRANT SELECT
-    ON OBJECT::[dbo].[rAssetsImported] TO [IE\UIT_USERS_VR]
-    AS [dbo];
-
-
-GO
-GRANT UPDATE
-    ON OBJECT::[dbo].[rAssetsImported] TO [IE\UIT_USERS_VR]
-    AS [dbo];
-
+CREATE UNIQUE NONCLUSTERED INDEX [IX_rAssetsImported_AssetId] ON [dbo].[rAssetsImported] ([AssetId]) WHERE [AssetId] is not null

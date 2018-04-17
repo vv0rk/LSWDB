@@ -25,7 +25,7 @@
     [Intence]     REAL           DEFAULT ((1)) NOT NULL,
     PRIMARY KEY CLUSTERED ([Id] ASC) WITH (FILLFACTOR = 90),
     CONSTRAINT [FK_rMaterialSvod_rSclad_IdSclad] FOREIGN KEY ([IdSclad]) REFERENCES [dbo].[rSclad] ([Id]), 
-    CONSTRAINT [FK_rMaterialSvod_tblAssets] FOREIGN KEY (AssetId) REFERENCES dbo.tblAssets ([AssetId]), 
+    CONSTRAINT [FK_rMaterialSvod_tblAssets] FOREIGN KEY (AssetId) REFERENCES dbo.tblAssets ([AssetId]) on delete cascade, 
     CONSTRAINT [FK_rMaterialSvod_rMaterialOriginal] FOREIGN KEY (idMaterialOriginal) REFERENCES dbo.rMaterialOriginal (Id)
 
 );

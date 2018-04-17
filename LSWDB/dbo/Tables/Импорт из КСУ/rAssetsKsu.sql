@@ -11,8 +11,10 @@ CREATE TABLE [dbo].[rAssetsKsu] (
     [inventoryNumber]  NVARCHAR (32)    NULL,
     [serialNumber]     NVARCHAR (32)    NULL,
     [mol]              NVARCHAR (255)   NULL,
+	-- Организация владелец
     [organization]     NVARCHAR (255)   NOT NULL,
 	-- это должно быть связано с rCompany$ !!! Необходим механизм для простановки этого значения
+	-- Организация пользователь
     [companyId]        INT              NOT NULL,
     [account]          NVARCHAR (12)    NULL,
     [count]            INT              NOT NULL,

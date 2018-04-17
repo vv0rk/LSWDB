@@ -63,4 +63,18 @@
     <Property Name="ParentElementType" Value="SqlTable" />
     <Property Name="NewName" Value="AssetId" />
   </Operation>
+  <Operation Name="Rename Refactor" Key="e7d2e322-8739-4f2f-9e5e-d016a11636af" ChangeDateTime="11/13/2017 21:43:25">
+    <Property Name="ElementName" Value="[dbo].[CK_rHSclad_Column]" />
+    <Property Name="ElementType" Value="SqlCheckConstraint" />
+    <Property Name="ParentElementName" Value="[dbo].[rHSclad]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="[CK_rHSclad_login_resp]" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="7e0c00b3-46fd-4d0b-ba94-530025f13618" ChangeDateTime="11/18/2017 18:56:01">
+    <Property Name="ElementName" Value="[dbo].[trTra]" />
+    <Property Name="ElementType" Value="SqlDmlTrigger" />
+    <Property Name="ParentElementName" Value="[dbo].[tblAssetUserRelations]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="[trTransfer]" />
+  </Operation>
 </Operations>

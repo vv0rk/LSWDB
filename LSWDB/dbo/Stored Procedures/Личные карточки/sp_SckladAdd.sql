@@ -13,17 +13,20 @@
 	@Type nvarchar(255) = NULL, 
 	@Action nvarchar(255) = NULL
 AS
+
+
 	Declare @EmployeeName nvarchar(255) = NULL;
 	declare @idCompany int = null;
 	Declare @idFilial int = null;
 	Declare @idResponce int = null;
 	Declare @idTypeSclad int = null;
 
-	IF @id is not null and @Action = N'Delete'
-		begin
-			delete from dbo.rHSclad where dbo.rHSclad.Id = @id
-			return 
-		end 
+	--IF @id is not null-- and @Action like 'Delete'
+	--	begin
+	--		delete from dbo.rHSclad 
+	--		where dbo.rHSclad.Id = @id;
+	--		return ;
+	--	end 
 
 	-- select @EmployeeName = dbo.rEmployee.title from dbo.rEmployee where dbo.rEmployee.id = @idResponce and dbo.rEmployee.removed = 0;
 	select @EmployeeName = dbo.rEmployee.title, @idResponce = dbo.rEmployee.id from dbo.rEmployee where dbo.rEmployee.login = @ResponceLogin and dbo.rEmployee.removed = 0;
